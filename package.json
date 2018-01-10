@@ -1,0 +1,19 @@
+{
+  "name": "wasos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "server-dev": "nodemon -r babel-register --watch ./server ./server/ --ignore ./node_modules"
+  },
+  "author": "Nirel Yehoyada",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "eslint": "^4.15.0",
+    "eslint-config-noamokman": "^7.2.0",
+    "nodemon": "^1.14.10"
+  }
+}

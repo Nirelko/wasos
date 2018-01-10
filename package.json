@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "server-dev": "nodemon -r babel-register --watch ./server ./server/ --ignore ./node_modules"
+    "server-dev": "nodemon -r babel-register --watch ./server ./server/ --ignore ./node_modules --inspect=5858"
   },
   "author": "Nirel Yehoyada",
   "license": "ISC",
@@ -15,5 +15,8 @@
     "eslint": "^4.15.0",
     "eslint-config-noamokman": "^7.2.0",
     "nodemon": "^1.14.10"
+  },
+  "dependencies": {
+    "axios": "^0.17.1"
   }
 }

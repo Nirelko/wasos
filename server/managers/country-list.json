@@ -11,7 +11,7 @@
 		"currency": "GB\"P",
 		"sizeSchema": "UK",
 		"country": "GB",
-		"relatedCountries": "Rest of the world"
+		"relatedCountries": "United Kingdom"
 	},
 	"spain": {
 		"store": "ES",
@@ -19,5 +19,47 @@
 		"country": "ES",
 		"sizeSchema": "ES",
 		"relatedCountries": "Spain"
+	},
+	"russia": {
+		"store": "RU",
+		"currency": "RUB",
+		"country": "RU",
+		"sizeSchema": "RU",
+		"relatedCountries": "Russia"
+	},
+	"GIF": {
+		"store": "IT",
+		"currency": "EUR",
+		"country": "IT",
+		"sizeSchema": "IT",
+		"relatedCountries": "Italy, Germany, France"
+	},
+	"Australia": {
+		"store": "AU",
+		"currency": "AUD",
+		"country": "AU",
+		"sizeSchema": "AU",
+		"relatedCountries": "Australia"
+	},
+	"HongKong": {
+		"store": "COM",
+		"currency": "HKD",
+		"country": "HK",
+		"sizeSchema": "UK",
+		"relatedCountries": "Hong Kong"
+	},
+	"Greece": {
+		"store": "COM",
+		"currency": "EUR",
+		"country": "GR",
+		"sizeSchema": "UK",
+		"relatedCountries": "Rest Of Europe"
+	},
+	"Israel": {
+		"store": "COM",
+		"currency": "USD",
+		"country": "IL",
+		"sizeSchema": "EU",
+		"relatedCountries": "Rest Of The World"
 	}
 }

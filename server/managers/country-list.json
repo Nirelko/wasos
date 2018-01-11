@@ -1,0 +1,23 @@
+{
+	"unitedStates": {
+		"store": "US",
+		"currency": "USD",
+		"sizeSchema": "US",
+		"country": "US",
+		"relatedCountries": "United States"
+	},
+	"unitedKingdom": {
+		"store": "COM",
+		"currency": "GB\"P",
+		"sizeSchema": "UK",
+		"country": "GB",
+		"relatedCountries": "Rest of the world"
+	},
+	"spain": {
+		"store": "ES",
+		"currency": "EUR",
+		"country": "ES",
+		"sizeSchema": "ES",
+		"relatedCountries": "Spain"
+	}
+}

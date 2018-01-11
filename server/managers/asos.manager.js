@@ -2,17 +2,22 @@ import axios from 'axios';
 import _ from 'lodash';
 
 import ProductResource from '../resoucres/product.resource';
+import MoneyResource from '../resoucres/money.resource';
 import storeList from '../constants/store-list.json';
 
 class AsosManager {
   constructor () {
     this.productResource = new ProductResource();
+    this.moneyResource = new MoneyResource();
+  }
+
+  load () {
+    return this.moneyResource.load();
   }
 
   formatDetailsByStore ({productPrice: {currency, current: {value: price}}, variants}, relatedCountries) {
     return {
-      price,
-      currency,
+      price: this.moneyResource.convert(price, currency),
       sizesStock: variants.map(x => x.isInStock),
       relatedCountries
     };
@@ -47,9 +52,8 @@ class AsosManager {
   }
 
   calculateAvailableSizes (sizeNames, stocskAndPrices) {
-    return stocskAndPrices.map(({price, currency, sizesStock, relatedCountries}) => ({
+    return stocskAndPrices.map(({price, sizesStock, relatedCountries}) => ({
       price,
-      currency,
       relatedCountries,
       stockSizes: sizeNames.filter((name, index) => sizesStock[index])
     }));

@@ -1,10 +1,8 @@
-import axios from 'axios';
+import BasicResource from './basic.resource';
 
-class ProductResource {
+class ProductResource extends BasicResource {
   constructor () {
-    this.client = axios.create({
-      baseURL: 'http://m.asos.com/api/'
-    });
+    super('http://m.asos.com/api/');
   }
 
   getDetailsByStore (id, {store, currency, sizeSchema, country}) {

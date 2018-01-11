@@ -1,24 +1,64 @@
 import axios from 'axios';
+import _ from 'lodash';
+
+import ProductResource from '../resoucres/product.resource';
+import storeList from '../constants/store-list.json';
 
 class AsosManager {
   constructor () {
-    this.client = axios.create({
-      baseURL: 'http://m.asos.com/api/'
-    });
+    this.productResource = new ProductResource();
+  }
 
-    this.extractPidFromUrl = this.extractPidFromUrl.bind(this);
-    this.getProductDetails = this.getProductDetails.bind(this);
+  formatDetailsByStore ({productPrice: {currency, current: {value: price}}, variants}, relatedCountries) {
+    return {
+      price,
+      currency,
+      sizesStock: variants.map(x => x.isInStock),
+      relatedCountries
+    };
   }
 
   extractPidFromUrl (url) {
-    const pidStartIndex = url.indexOf('prd/') + 4;
+    const pidStartIndex = url.indexOf('prd/') + 'prd/'.length;
 
     return url.substring(pidStartIndex, url.indexOf('?', pidStartIndex));
   }
 
-  getProductDetails(url, { store, currency, sizeSchema, country}) {
-    return this.client.get(`/product/catalogue/v2/stockprice?productIds=${this.extractPidFromUrl(url)}&store=${store}&currency=${currency}&keyStoreDataversion=2&sizeSchema=${sizeSchema}&country=${country}`)
-      .then(x => x.data);
+  getDetailsByStore (url, store) {
+    return this.productResource.getDetailsByStore(this.extractPidFromUrl(url), store)
+      .then(([product]) => this.formatDetailsByStore(product, store.relatedCountries));
+  }
+
+  loadStoresDetails (url) {
+    return Promise.all(_.map(storeList, x => this.getDetailsByStore(url, x)));
+  }
+
+  loadBasicDetails (url) {
+    return axios.get(url)
+      .then(({data}) => {
+        const fullProductJsonStartIndex = data.lastIndexOf('view(\'') + 'view(\''.length;
+        const {name, variants} = JSON.parse(data.substring(fullProductJsonStartIndex, data.indexOf('}\',', fullProductJsonStartIndex) + 1));
+
+        return {
+          name,
+          sizeNames: variants.map(x => x.size)
+        };
+      });
+  }
+
+  calculateAvailableSizes (sizeNames, stocskAndPrices) {
+    return stocskAndPrices.map(({price, currency, sizesStock, relatedCountries}) => ({
+      price,
+      currency,
+      relatedCountries,
+      stockSizes: sizeNames.filter((name, index) => sizesStock[index])
+    }));
+  }
+
+  getProductDetails (url) {
+    return this.loadBasicDetails(url)
+      .then(({name, sizeNames}) => this.loadStoresDetails(url)
+        .then(stocskAndPrices => ({name, sizes: this.calculateAvailableSizes(sizeNames, stocskAndPrices)})));
   }
 }
 

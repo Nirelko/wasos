@@ -8,7 +8,7 @@
 	},
 	"unitedKingdom": {
 		"store": "COM",
-		"currency": "GB\"P",
+		"currency": "GBP",
 		"sizeSchema": "UK",
 		"country": "GB",
 		"relatedCountries": "United Kingdom"

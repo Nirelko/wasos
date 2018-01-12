@@ -31,7 +31,9 @@ class AsosManager {
 
   getDetailsByStore (url, store) {
     return this.productResource.getDetailsByStore(this.extractPidFromUrl(url), store)
-      .then(([product]) => this.formatDetailsByStore(product, store.relatedCountries));
+      .then(([product]) => product ?
+        this.formatDetailsByStore(product, store.relatedCountries) :
+        {relatedCountries: store.relatedCountries, doesntExist: true});
   }
 
   loadStoresDetails (url) {
@@ -52,11 +54,11 @@ class AsosManager {
   }
 
   calculateAvailableSizes (sizeNames, stocskAndPrices) {
-    return stocskAndPrices.map(({price, sizesStock, relatedCountries}) => ({
+    return stocskAndPrices.map(({price, sizesStock, relatedCountries, doesntExist}) => !doesntExist ? {
       price,
       relatedCountries,
       stockSizes: sizeNames.filter((name, index) => sizesStock[index])
-    }));
+    } : {relatedCountries, doesntExist});
   }
 
   getProductDetails (url) {

@@ -29,15 +29,17 @@ class AsosManager {
     return url.substring(pidStartIndex, url.indexOf('?', pidStartIndex));
   }
 
-  getDetailsByStore (url, store) {
-    return this.productResource.getDetailsByStore(this.extractPidFromUrl(url), store)
+  getDetailsByStore (pid, store) {
+    return this.productResource.getDetailsByStore(pid, store)
       .then(([product]) => product ?
         this.formatDetailsByStore(product, store.relatedCountries) :
         {relatedCountries: store.relatedCountries, doesntExist: true});
   }
 
   loadStoresDetails (url) {
-    return Promise.all(_.map(storeList, x => this.getDetailsByStore(url, x)));
+    const pid = this.extractPidFromUrl(url);
+
+    return Promise.all(_.map(storeList, x => this.getDetailsByStore(pid, x)));
   }
 
   loadBasicDetails (url) {
@@ -54,11 +56,11 @@ class AsosManager {
   }
 
   calculateAvailableSizes (sizeNames, stocskAndPrices) {
-    return stocskAndPrices.map(({price, sizesStock, relatedCountries, doesntExist}) => !doesntExist ? {
+    return _.orderBy(stocskAndPrices.map(({price, sizesStock, relatedCountries, doesntExist}) => !doesntExist ? {
       price,
       relatedCountries,
       stockSizes: sizeNames.filter((name, index) => sizesStock[index])
-    } : {relatedCountries, doesntExist});
+    } : {relatedCountries, doesntExist}), x => x.price);
   }
 
   getProductDetails (url) {

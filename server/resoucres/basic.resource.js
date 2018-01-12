@@ -1,7 +1,7 @@
 import { create } from 'axios';
 
 class BasicResource {
-  constructor(baseURL) {
+  constructor (baseURL) {
     this.client = create({
       baseURL
     });

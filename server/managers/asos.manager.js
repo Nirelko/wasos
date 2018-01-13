@@ -4,6 +4,7 @@ import _ from 'lodash';
 import ProductResource from '../resoucres/product.resource';
 import MoneyResource from '../resoucres/money.resource';
 import storeList from '../constants/store-list.json';
+import { findJsonInText } from '../common/utils';
 
 class AsosManager {
   constructor () {
@@ -25,8 +26,13 @@ class AsosManager {
 
   extractPidFromUrl (url) {
     const pidStartIndex = url.indexOf('prd/') + 'prd/'.length;
+    let pidEndIndex = url.indexOf('?', pidStartIndex);
 
-    return url.substring(pidStartIndex, url.indexOf('?', pidStartIndex));
+    if (pidEndIndex === -1) {
+      pidEndIndex = url.length;
+    }
+
+    return url.substring(pidStartIndex, pidEndIndex);
   }
 
   getDetailsByStore (pid, store) {
@@ -45,8 +51,7 @@ class AsosManager {
   loadBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
-        const fullProductJsonStartIndex = data.lastIndexOf('view(\'') + 'view(\''.length;
-        const {name, variants} = JSON.parse(data.substring(fullProductJsonStartIndex, data.indexOf('}\',', fullProductJsonStartIndex) + 1));
+        const {name, variants} = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
 
         return {
           name,

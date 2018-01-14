@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 export const findJsonInText = (text, startIndex = 0) => {
   const jsonStartIndex = text.indexOf('{', startIndex);
   let currentIndex = jsonStartIndex + 1;
@@ -21,4 +23,8 @@ export const findJsonInText = (text, startIndex = 0) => {
   return text.substring(jsonStartIndex, currentIndex)
     .split('\\\'')
     .join('\'');
+};
+
+export const exportObjectToFile = (name, object) => {
+  fs.writeFile(`./${name}`, JSON.stringify(object, null, '\t'));
 };

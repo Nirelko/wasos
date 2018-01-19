@@ -4,18 +4,59 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
+    "client-dev": "webpack-dev-server",
     "server-dev": "nodemon -r babel-register --watch ./server ./server/ --ignore ./node_modules --inspect=5858"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nirelko/wasos.git"
+  },
+  "keywords": [
+    "watch",
+    "ASOS",
+    "watch asos",
+    "shoes"
+  ],
+  "bugs": {
+    "url": "https://github.com/Nirelko/wasos/issues"
+  },
+  "homepage": "https://github.com/Nirelko/wasos#readme",
   "author": "Nirel Yehoyada",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-register": "^6.26.0",
+    "css-loader": "^0.28.9",
     "eslint": "^4.15.0",
     "eslint-config-noamokman": "^7.2.0",
-    "nodemon": "^1.14.10"
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.30.1",
+    "material-ui": "^1.0.0-beta.29",
+    "mdi-react": "^2.1.19",
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.14.11",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-hot-loader": "^3.1.3",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-actions": "^2.2.1",
+    "redux-axios-middleware": "^4.0.0",
+    "redux-form": "^7.2.0",
+    "redux-form-material-ui": "^5.0.0-beta.2",
+    "reflexbox": "^3.0.0-0",
+    "roboto-fontface": "^0.8.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.0"
   },
   "dependencies": {
     "axios": "^0.17.1",

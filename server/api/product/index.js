@@ -3,6 +3,6 @@ import * as controller from './product.controller';
 
 const productRouter = AsyncRouter();
 
-productRouter.post('/', controller.getProduct);
+productRouter.get('/', controller.getProduct);
 
 export default productRouter;

@@ -1,10 +1,11 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 import { withStyles } from 'material-ui/styles';
 import { Flex, reflex } from 'reflexbox';
 import MagnifyIcon from 'mdi-react/MagnifyIcon';
-import IconButton from 'material-ui/IconButton';
+import { TextField } from 'redux-form-material-ui';
+import { Field } from 'redux-form';
 
 const styles = theme => ({
   inputContainer: {
@@ -19,13 +20,13 @@ const styles = theme => ({
 });
 
 const ReflexPaper = reflex(Paper);
-const ReflexTexField = reflex(TextField);
+const ReflexTexField = reflex(Field);
 
-export default withStyles(styles)(({ classes, text }) => (
+export default withStyles(styles)(({ classes, text, onClick }) => (
   <ReflexPaper flex>
-    <ReflexTexField InputProps={{ disableUnderline: true, classes: { input: classes.input } }} flex auto placeholder={text} />
+    <ReflexTexField name='url' component={TextField} InputProps={{ disableUnderline: true, classes: { input: classes.input } }} flex auto placeholder={text} />
     <Flex column justify='center' className={classes.buttonContainer}>
-      <IconButton>
+      <IconButton onClick={onClick}>
         <MagnifyIcon />
       </IconButton>
     </Flex>

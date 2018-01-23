@@ -1,0 +1,6 @@
+import { createStore, combineReducers } from 'redux';
+import { reducer as form } from 'redux-form'
+
+import product from './shell/home/search/redux';
+
+export default createStore(combineReducers({ product, form }));

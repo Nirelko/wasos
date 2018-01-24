@@ -23,5 +23,4 @@ export default reduxForm({ form: 'loadProduct' })(withStyles(styles)(({ classes,
       </Flex>
       <SearchInput text='Your url' onClick={() => console.log(form)} />
     </Flex>
-    <span>{url}</span>
   </form>)));

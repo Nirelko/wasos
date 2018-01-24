@@ -50,6 +50,7 @@
     "redux-axios-middleware": "^4.0.0",
     "redux-form": "^7.2.0",
     "redux-form-material-ui": "^5.0.0-beta.2",
+    "redux-logger": "^3.0.6",
     "reflexbox": "^3.0.0-0",
     "roboto-fontface": "^0.8.0",
     "sass-loader": "^6.0.6",

@@ -1,9 +1,9 @@
 import { createMuiTheme } from 'material-ui/styles';
-import { lime, amber, red } from 'material-ui/colors';
+import { lightBlue, amber, red } from 'material-ui/colors';
 
 export default createMuiTheme({
   palette: {
-    primary: lime,
+    primary: lightBlue,
     secondary: amber,
     error: red
   }

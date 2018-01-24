@@ -1,14 +1,13 @@
 import React from 'react';
 import { Flex } from 'reflexbox';
 import { withStyles } from 'material-ui/styles';
-import { lightGreen } from 'material-ui/colors';
 
 import Preview from './preview';
 import Search from './search';
 
 const styles = theme => ({
   contentCard: {
-    background: `linear-gradient(141deg, ${theme.palette.primary[500]} 40%, ${lightGreen[500]} 90%)`,
+    background: `linear-gradient(141deg, ${theme.palette.primary[500]} 0%, ${theme.palette.primary[300]} 51%, ${theme.palette.primary[500]} 100%)`,
     height: '60vh',
     color: 'white'
   }

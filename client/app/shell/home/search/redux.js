@@ -1,5 +1,18 @@
-import { createAction, handleAction } from 'redux-actions';
+import { createAction, handleActions } from 'redux-actions';
 
-export const loadProduct = createAction('LOAD_PRODUCT');
+export const loadProduct = createAction('LOAD_PRODUCT', url => ({
+  request: {
+    url: '/product',
+    params: {
+      url
+    }
+  }
+}));
 
-export default handleAction(loadProduct, (state, {payload: url}) => {url}, {});
+export default handleActions({
+  [loadProduct]: () => ({
+    isLoading: true
+  }),
+  [`${loadProduct}_SUCCESS`]: (state, {payload: {data}}) => data,
+  [`${loadProduct}_FAIL`]: () => ({test: 'no'})
+}, {});

@@ -1,16 +1,23 @@
 import React from 'react';
 import { Flex } from 'reflexbox';
+import { withStyles } from 'material-ui/styles';
 
 import Header from './header';
 import Routes from './rotues';
 import Footer from './footer';
 
-export default () => (
-  <Flex column auto>
+const styles = {
+  appContainer: {
+    overflowY: 'auto'
+  }
+}
+
+export default withStyles(styles)(({ classes: { appContainer } }) => (
+  <Flex className={appContainer} column auto>
     <Header />
-    <Flex auto>
+    <Flex column auto>
       <Routes />
     </Flex>
-    <Footer />
+    {/* <Footer /> */}
   </Flex>
-);
+));

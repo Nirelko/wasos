@@ -1,5 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
+import AppBar from 'material-ui/AppBar';
 import { withStyles } from 'material-ui/styles';
 import { Flex } from 'reflexbox';
 
@@ -24,9 +24,9 @@ const ToolBarStyle = theme => ({
 });
 
 export default withStyles(ToolBarStyle)(({ classes }) => (
-  <Paper className={classes.toolBar}>
+  <AppBar className={classes.toolBar}>
     <Flex className={classes.titleContainer}>
       <img src={appIcon} className={classes.appIcon} />
     </Flex>
-  </Paper>
+  </AppBar>
 ));

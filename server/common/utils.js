@@ -26,5 +26,6 @@ export const findJsonInText = (text, startIndex = 0) => {
 };
 
 export const exportObjectToFile = (name, object) => {
+  console.log(object);
   fs.writeFile(`./${name}`, JSON.stringify(object, null, '\t'));
 };

@@ -3,62 +3,62 @@
 		"store": "US",
 		"currency": "USD",
 		"sizeSchema": "US",
-		"country": "US",
+		"countryCode": "US",
 		"relatedCountries": "United States"
 	},
 	"unitedKingdom": {
 		"store": "COM",
 		"currency": "GBP",
 		"sizeSchema": "UK",
-		"country": "GB",
+		"countryCode": "GB",
 		"relatedCountries": "United Kingdom"
 	},
 	"spain": {
 		"store": "ES",
 		"currency": "EUR",
-		"country": "ES",
+		"countryCode": "ES",
 		"sizeSchema": "ES",
 		"relatedCountries": "Spain"
 	},
 	"russia": {
 		"store": "RU",
 		"currency": "RUB",
-		"country": "RU",
+		"countryCode": "RU",
 		"sizeSchema": "RU",
 		"relatedCountries": "Russia"
 	},
 	"GIF": {
 		"store": "IT",
 		"currency": "EUR",
-		"country": "IT",
+		"countryCode": "IT",
 		"sizeSchema": "IT",
 		"relatedCountries": "Italy, Germany, France"
 	},
 	"Australia": {
 		"store": "AU",
 		"currency": "AUD",
-		"country": "AU",
+		"countryCode": "AU",
 		"sizeSchema": "AU",
 		"relatedCountries": "Australia"
 	},
 	"HongKong": {
 		"store": "COM",
 		"currency": "HKD",
-		"country": "HK",
+		"countryCode": "HK",
 		"sizeSchema": "UK",
 		"relatedCountries": "Hong Kong"
 	},
 	"Greece": {
 		"store": "COM",
 		"currency": "EUR",
-		"country": "GR",
+		"countryCode": "GR",
 		"sizeSchema": "UK",
 		"relatedCountries": "Rest Of Europe"
 	},
 	"Israel": {
 		"store": "COM",
 		"currency": "USD",
-		"country": "IL",
+		"countryCode": "IL",
 		"sizeSchema": "EU",
 		"relatedCountries": "Rest Of The World"
 	}

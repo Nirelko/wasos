@@ -11,8 +11,12 @@ export const loadProduct = createAction('LOAD_PRODUCT', url => ({
 
 export default handleActions({
   [loadProduct]: () => ({
-    isLoading: true
+    isFetching: true
   }),
-  [`${loadProduct}_SUCCESS`]: (state, {payload: {data}}) => data,
-  [`${loadProduct}_FAIL`]: () => ({test: 'no'})
+  [`${loadProduct}_SUCCESS`]: (state, { payload: { data } }) => ({
+    data
+  }),
+  [`${loadProduct}_FAIL`]: () => ({
+    test: 'no'
+  })
 }, {});

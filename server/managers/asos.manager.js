@@ -16,10 +16,11 @@ class AsosManager {
     return this.moneyResource.load();
   }
 
-  formatDetailsByStore ({productPrice: {currency, current: {value: price}}, variants}, relatedCountries) {
+  formatDetailsByStore ({productPrice: {currency, current: {value: price}}, variants}, {relatedCountries, countryCode}) {
     return {
       price: this.moneyResource.convert(price, currency),
       sizesStock: variants.map(x => x.isInStock),
+      countryCode,
       relatedCountries
     };
   }
@@ -38,8 +39,8 @@ class AsosManager {
   getDetailsByStore (pid, store) {
     return this.productResource.getDetailsByStore(pid, store)
       .then(([product]) => product ?
-        this.formatDetailsByStore(product, store.relatedCountries) :
-        {relatedCountries: store.relatedCountries, doesntExist: true});
+        this.formatDetailsByStore(product, store) :
+        {relatedCountries: store.relatedCountries, countryCode: store.countryCode, doesntExist: true});
   }
 
   loadStoresDetails (url) {
@@ -51,27 +52,29 @@ class AsosManager {
   loadBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
-        const {name, variants} = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
+        const {name, variants, images} = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
 
         return {
           name,
-          sizeNames: variants.map(x => x.size)
+          sizeNames: variants.map(x => x.size),
+          images: images.map(x => x.url)
         };
       });
   }
 
-  calculateAvailableSizes (sizeNames, stocskAndPrices) {
-    return _.orderBy(stocskAndPrices.map(({price, sizesStock, relatedCountries, doesntExist}) => !doesntExist ? {
+  calculateStoreDetails (sizeNames, stocskAndPrices) {
+    return _.orderBy(stocskAndPrices.map(({price, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
       price,
       relatedCountries,
+      countryCode,
       stockSizes: sizeNames.filter((name, index) => sizesStock[index])
-    } : {relatedCountries, doesntExist}), x => x.price);
+    } : {relatedCountries, countryCode, doesntExist}), x => x.price);
   }
 
   getProductDetails (url) {
     return this.loadBasicDetails(url)
-      .then(({name, sizeNames}) => this.loadStoresDetails(url)
-        .then(stocskAndPrices => ({name, sizes: this.calculateAvailableSizes(sizeNames, stocskAndPrices)})));
+      .then(({name, images, sizeNames}) => this.loadStoresDetails(url)
+        .then(stocskAndPrices => ({name, images, storesDetails: this.calculateStoreDetails(sizeNames, stocskAndPrices)})));
   }
 }
 

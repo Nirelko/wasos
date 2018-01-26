@@ -17,7 +17,7 @@ class MoneyResource extends BasicResource {
       throw new Error('rates haven\'t load yet');
     }
 
-    return amount / this.rates[from];
+    return Math.round(amount / this.rates[from]);
   }
 }
 

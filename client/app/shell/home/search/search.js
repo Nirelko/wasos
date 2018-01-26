@@ -15,12 +15,12 @@ const styles = {
   }
 };
 
-export default reduxForm({ form: 'loadProduct' })(withStyles(styles)(({ classes, handleSubmit, onProductSearch, url }) => (
+export default reduxForm({ form: 'loadProduct' })(withStyles(styles)(({ classes, handleSubmit, onProductSearch, isFetching }) => (
   <form onSubmit={handleSubmit(onProductSearch)}>
     <Flex column className={classes.container}>
       <Flex align='center' justify='center'>
         <span className={classes.title}>Search your product now and start buying smartly!</span>
       </Flex>
-      <SearchInput text='Your url' onClick={() => console.log(form)} />
+      <SearchInput text='Your url' disabled={isFetching} />
     </Flex>
   </form>)));

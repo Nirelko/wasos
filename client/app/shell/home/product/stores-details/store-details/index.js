@@ -9,14 +9,18 @@ const styles = {
   },
   countries: {
     marginTop: '24px'
+  },
+  stockSizes: {
+    marginTop: '15px'
   }
 };
 
-export default withStyles(styles)(({ classes: { contianer, countries }, price, relatedCountries, countryCode, stockSizes }) => (
-  <Flex column align='center' className={contianer}>
+export default withStyles(styles)(({ classes, price, relatedCountries, countryCode, stockSizes }) => (
+  <Flex column align='center' className={classes.contianer}>
     <Flag code={countryCode} height='36' />
-    <span className={countries}>{relatedCountries}</span>
+    <span className={classes.countries}>{relatedCountries}</span>
     <span>{price}</span>
+    <span className={classes.stockSizes}>Sizes In Stock:</span>
     {
       stockSizes.map(x => <span key={x}>{x}</span>)
     }

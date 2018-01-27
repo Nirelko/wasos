@@ -18,7 +18,7 @@ const styles = {
 export default withStyles(styles)(({ classes, price, relatedCountries, countryCode, stockSizes }) => (
   <Flex column align='center' className={classes.contianer}>
     <Flag code={countryCode} height='36' />
-    <span className={classes.countries}>{relatedCountries}</span>
+    <span className={classes.countries}>Related: {relatedCountries}</span>
     <span>{price}</span>
     <span className={classes.stockSizes}>Sizes In Stock:</span>
     {

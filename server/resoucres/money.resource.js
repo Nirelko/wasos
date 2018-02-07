@@ -5,19 +5,9 @@ class MoneyResource extends BasicResource {
     super('https://api.fixer.io/');
   }
 
-  load () {
+  get () {
     return this.client.get('latest?base=ILS')
-      .then(({data: {rates}}) => {
-        this.rates = rates;
-      });
-  }
-
-  convert (amount, from) {
-    if (!this.rates) {
-      throw new Error('rates haven\'t load yet');
-    }
-
-    return Math.round(amount / this.rates[from]);
+      .then(({data: {rates}}) => ({...rates, ILS: 1}));
   }
 }
 

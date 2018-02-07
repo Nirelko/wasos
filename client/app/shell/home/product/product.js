@@ -24,7 +24,7 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {} }) => (
+export default withStyles(styles)(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {}, currency }) => (
   <Flex className={container}>
     <div>
       <Card>
@@ -36,7 +36,7 @@ export default withStyles(styles)(({ classes: { image, container, productName, d
         <Typography className={productName} type='title'>
           {product.name}
         </Typography>
-        <StoresDetail {...product} />
+        <StoresDetail {...product} currency={currency} />
       </Flex>
     </Card>
   </Flex>

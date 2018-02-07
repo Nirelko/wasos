@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex } from 'reflexbox';
 import { withStyles } from 'material-ui/styles';
+import { compose } from 'react-compose';
 
 import Header from './header';
 import Routes from './rotues';

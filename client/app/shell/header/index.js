@@ -4,6 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import { Flex } from 'reflexbox';
 
 import appIcon from '../../../assests/app-icon.png';
+import CurrencyChooser from './currency-chooser';
 
 const ToolBarStyle = theme => ({
   toolBar: {
@@ -29,6 +30,7 @@ export default withStyles(ToolBarStyle)(({ classes }) => (
       <Flex auto>
         <img src={appIcon} className={classes.appIcon} />
       </Flex>
+      <CurrencyChooser />
     </Flex>
   </AppBar>
 ));

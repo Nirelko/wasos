@@ -1,8 +1,8 @@
 import {AsyncRouter} from 'express-async-router';
-import * as controller from './product.controller';
+import { getProduct } from './product.controller';
 
 const productRouter = AsyncRouter();
 
-productRouter.get('/', controller.getProduct);
+productRouter.get('/', getProduct);
 
 export default productRouter;

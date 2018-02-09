@@ -5,11 +5,9 @@ import Product from './product';
 
 const calculatePricesByCurrency = (product, currencies, selectedCurrency) => ({
   ...product,
-  storesDetails: _.sortBy(product.storesDetails.map(({ price, currency, relatedCountries, countryCode, stockSizes }) => ({
-    price: _.round((price / currencies[currency]) * currencies[selectedCurrency], 2),
-    relatedCountries,
-    countryCode,
-    stockSizes
+  storesDetails: _.sortBy(product.storesDetails.map(({currency, ...x}) => ({
+    ...x,
+    price: _.round((x.price / currencies[currency]) * currencies[selectedCurrency], 2)
   })), x => x.price)
 });
 

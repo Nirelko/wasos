@@ -2,6 +2,7 @@ import React from 'react';
 import {Flex} from 'reflexbox';
 import Flag from 'react-world-flags';
 import {withStyles} from 'material-ui/styles';
+import {compose} from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 const styles = {
@@ -19,7 +20,9 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(({classes, price, relatedCountries, countryCode, currency, stockSizes = [], doesntExist}) => (
+export default compose(
+  withStyles(styles)
+)(({classes, price, relatedCountries, countryCode, currency, stockSizes = [], doesntExist}) => (
   <Flex column align='center' className={classes.contianer}>
     <Flag code={countryCode} height='36' />
     <span className={classes.countries}>Related: {relatedCountries}</span>
@@ -30,7 +33,12 @@ export default withStyles(styles)(({classes, price, relatedCountries, countryCod
         <Flex column align='center'>
           <span>{getSymbolFromCurrency(currency)}{price}</span>
           <span className={classes.stockSizes}>Sizes In Stock:</span>
-          {stockSizes.map(x => <span key={x}>{x}</span>)}
+          {
+            stockSizes && stockSizes.length ?
+              stockSizes.map(x => <span key={x}>{x}</span>) : (
+                <span>Out of stock</span>
+              )
+          }
         </Flex>
       )
     }

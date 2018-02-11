@@ -1,5 +1,6 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
+import { compose } from 'recompose';
 
 const styles = theme => ({
   footer: {
@@ -9,7 +10,9 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({classes}) => (
+export default compose(
+  withStyles(styles)
+)(({ classes }) => (
   <footer className={classes.footer}>
     <span>footer</span>
   </footer>

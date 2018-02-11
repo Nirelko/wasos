@@ -1,6 +1,7 @@
 import React from 'react';
 import withStyles from 'material-ui/styles/withStyles';
-import { CurrencyEur, AlarmCheck, CurrencyUsd } from 'mdi-material-ui';
+import {CurrencyEur, AlarmCheck, CurrencyUsd} from 'mdi-material-ui';
+import {compose} from 'recompose';
 import Flex from 'reflexbox/dist/Flex';
 
 const styles = {
@@ -21,7 +22,9 @@ const styles = {
   }
 };
 
-export default withStyles(styles)(({ classes: {title, subTitle, mainIcon, subIcon} }) => (
+export default compose(
+  withStyles(styles)
+)(({classes: {title, subTitle, mainIcon, subIcon}}) => (
   <Flex auto>
     <Flex auto column align='center' justify='center'>
       <span className={title}>Save your time and money</span>

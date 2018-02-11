@@ -1,7 +1,8 @@
 import React from 'react';
 import withStyles from 'material-ui/styles/withStyles';
 import Flex from 'reflexbox/dist/Flex';
-import { reduxForm } from 'redux-form';
+import {reduxForm} from 'redux-form';
+import {compose} from 'recompose';
 
 import SearchInput from './search-input';
 
@@ -15,7 +16,10 @@ const styles = {
   }
 };
 
-export default reduxForm({ form: 'loadProduct' })(withStyles(styles)(({ classes, handleSubmit, onProductSearch, isFetching }) => (
+export default compose(
+  reduxForm({form: 'loadProduct'}),
+  withStyles(styles)
+)(({classes, handleSubmit, onProductSearch, isFetching}) => (
   <form onSubmit={handleSubmit(onProductSearch)}>
     <Flex column className={classes.container}>
       <Flex align='center' justify='center'>
@@ -23,4 +27,4 @@ export default reduxForm({ form: 'loadProduct' })(withStyles(styles)(({ classes,
       </Flex>
       <SearchInput text='Your url' disabled={isFetching} />
     </Flex>
-  </form>)));
+  </form>));

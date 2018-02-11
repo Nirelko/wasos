@@ -10,7 +10,8 @@ export const loadProduct = createAction('LOAD_PRODUCT', url => ({
 }));
 
 export default handleActions({
-  [loadProduct]: () => ({
+  [loadProduct]: state => ({
+    ...state,
     isFetching: true
   }),
   [`${loadProduct}_SUCCESS`]: (state, { payload: { data } }) => ({

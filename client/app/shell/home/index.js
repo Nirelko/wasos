@@ -1,7 +1,8 @@
 import React from 'react';
-import { Flex } from 'reflexbox';
-import { withStyles } from 'material-ui/styles';
-import { cyan } from 'material-ui/colors';
+import {Flex} from 'reflexbox';
+import {withStyles} from 'material-ui/styles';
+import {cyan} from 'material-ui/colors';
+import {compose} from 'recompose';
 
 import Preview from './preview';
 import Search from './search';
@@ -15,7 +16,9 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes }) => (
+export default compose(
+  withStyles(styles)
+)(({classes}) => (
   <div>
     <Flex className={classes.contentCard} column>
       <Preview />

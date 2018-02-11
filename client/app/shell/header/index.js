@@ -1,7 +1,8 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import { withStyles } from 'material-ui/styles';
-import { Flex } from 'reflexbox';
+import {withStyles} from 'material-ui/styles';
+import {Flex} from 'reflexbox';
+import {compose} from 'recompose';
 
 import appIcon from '../../../assests/app-icon.png';
 import CurrencyChooser from './currency-chooser';
@@ -24,7 +25,9 @@ const ToolBarStyle = theme => ({
   }
 });
 
-export default withStyles(ToolBarStyle)(({ classes }) => (
+export default compose(
+  withStyles(ToolBarStyle)
+)(({classes}) => (
   <AppBar className={classes.toolBar}>
     <Flex className={classes.titleContainer} align='center'>
       <Flex auto>

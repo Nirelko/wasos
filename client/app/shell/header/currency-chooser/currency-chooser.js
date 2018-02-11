@@ -1,18 +1,18 @@
 import React from 'react';
-import {MenuItem, Select} from 'material-ui';
-import {compose, lifecycle} from 'recompose';
+import { MenuItem, Select } from 'material-ui';
+import { compose, lifecycle } from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import _ from 'lodash';
 
 export default compose(
   lifecycle({
     componentDidMount () {
-      const {loadCurrencies} = this.props;
+      const { loadCurrencies } = this.props;
 
       loadCurrencies();
     }
   })
-)(({currencies, selected = '', onCurrencyChange}) => (
+)(({ currencies, selected = '', onCurrencyChange }) => (
   <Select
     name='name'
     value={selected}

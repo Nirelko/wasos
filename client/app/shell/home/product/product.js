@@ -2,6 +2,7 @@ import React from 'react';
 import { Flex, reflex } from 'reflexbox';
 import { withStyles } from 'material-ui/styles';
 import { Typography, Card } from 'material-ui';
+import { compose } from 'recompose';
 
 import StoresDetail from './stores-details';
 
@@ -24,8 +25,10 @@ const styles = theme => ({
   }
 });
 
-export default withStyles(styles)(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {}, currency }) => (
-  <Flex className={container}>
+export default compose(
+  withStyles(styles)
+)(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {}, currency }) => (
+  <Flex className={container} align='center'>
     <div>
       <Card>
         <img src={product.images && product.images[0]} className={image} />

@@ -6,6 +6,7 @@ import {Flex, reflex} from 'reflexbox';
 import { Magnify } from 'mdi-material-ui';
 import {TextField} from 'redux-form-material-ui';
 import {Field} from 'redux-form';
+import {compose} from 'recompose';
 import _ from 'lodash';
 
 const styles = theme => ({
@@ -27,7 +28,9 @@ const styles = theme => ({
 const ReflexPaper = reflex(Paper);
 const ReflexTexField = reflex(Field);
 
-export default withStyles(styles)(({classes: { input, buttonContainer, root }, text, onClick = _.noop, disabled}) => (
+export default compose(
+  withStyles(styles)
+)(({classes: { input, buttonContainer, root }, text, onClick = _.noop, disabled}) => (
   <ReflexPaper flex>
     <ReflexTexField
       name='url'

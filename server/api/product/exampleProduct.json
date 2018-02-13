@@ -1,0 +1,122 @@
+{
+	"name": "Example Product - adidas Originals Stan Smith Leather Trainers In White M20325",
+	"images": [
+		"http://images.asos-media.com/products/adidas-originals-stan-smith-leather-trainers-in-white-m20325/4601984-1-white",
+		"http://images.asos-media.com/products/adidas-originals-stan-smith-leather-trainers-in-white-m20325/4601984-2",
+		"http://images.asos-media.com/products/adidas-originals-stan-smith-leather-trainers-in-white-m20325/4601984-3",
+		"http://images.asos-media.com/products/adidas-originals-stan-smith-leather-trainers-in-white-m20325/4601984-4"
+	],
+	"storesDetails": [
+		{
+			"price": 60,
+			"currency": "USD",
+			"relatedCountries": "United States",
+			"countryCode": "US",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 70,
+			"currency": "GBP",
+			"relatedCountries": "United Kingdom",
+			"countryCode": "GB",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 94.59,
+			"currency": "EUR",
+			"relatedCountries": "Rest Of Europe",
+			"countryCode": "GR",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 94.99,
+			"currency": "EUR",
+			"relatedCountries": "Spain",
+			"countryCode": "ES",
+			"stockSizes": [
+				"UK 6 - EU 39.5 - US 6.5",
+				"UK 7 - EU 40.5 - US 7.5",
+				"UK 8 - EU 42 - US 8.5",
+				"UK 9 - EU 43.5 - US 9.5",
+				"UK 9.5 - EU 44 - US 10",
+				"UK 10 - EU 44.5 - US 10.5",
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 94.99,
+			"currency": "EUR",
+			"relatedCountries": "Italy, Germany, France",
+			"countryCode": "IT",
+			"stockSizes": [
+				"UK 6 - EU 39.5 - US 6.5",
+				"UK 7 - EU 40.5 - US 7.5",
+				"UK 8 - EU 42 - US 8.5",
+				"UK 9 - EU 43.5 - US 9.5",
+				"UK 9.5 - EU 44 - US 10",
+				"UK 10 - EU 44.5 - US 10.5",
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 110.54,
+			"currency": "USD",
+			"relatedCountries": "Rest Of The World",
+			"countryCode": "IL",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 130,
+			"currency": "AUD",
+			"relatedCountries": "Australia",
+			"countryCode": "AU",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 853.65,
+			"currency": "HKD",
+			"relatedCountries": "Hong Kong",
+			"countryCode": "HK",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		},
+		{
+			"price": 5490,
+			"currency": "RUB",
+			"relatedCountries": "Russia",
+			"countryCode": "RU",
+			"stockSizes": [
+				"UK 11 - EU 46 - US 11.5",
+				"UK 12 - EU 47.5 - US 12.5",
+				"UK 13 - EU 48.5 - US 13.5"
+			]
+		}
+	]
+}

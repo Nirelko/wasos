@@ -4,7 +4,7 @@ import reduxLogger from 'redux-logger';
 import { reducer as form } from 'redux-form';
 import axios from 'axios';
 
-import productSearch from './shell/home/search/redux';
+import productSearch from './shell/home/product/redux';
 import currencies from './shell/header/currency-chooser/redux';
 
 const axiosClient = axios.create({

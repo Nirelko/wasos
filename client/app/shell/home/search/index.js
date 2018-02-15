@@ -4,9 +4,9 @@ import { loadProduct } from '../product/redux';
 import Search from './search';
 
 export default connect(
-  ({ productSearch: {isFetching } }) => ({ isFetching }),
+  ({ productSearch: {isFetching} }) => ({ isFetching }),
   dispatch => ({
-    onProductSearch ({ url }) {
+    loadProduct ({ url }) {
       dispatch(loadProduct(url));
     }
   }))(Search);

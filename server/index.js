@@ -3,6 +3,7 @@ import { load } from 'dotenv-extended';
 import { json, urlencoded } from 'body-parser';
 
 import api from './api';
+import urlProductExtractor from './middlewares/url-product-extractor';
 
 console.log('Server is loading...');
 
@@ -16,5 +17,7 @@ serverIntance.use(urlencoded({ extended: false })); // support encoded bodies
 serverIntance.use(json()); // support json encoded bodies
 
 serverIntance.use('/api', api);
+
+serverIntance.use(urlProductExtractor());
 
 serverIntance.listen(serverPort, () => console.log(`Server listening at port ${serverPort}`));

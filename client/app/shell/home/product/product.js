@@ -1,5 +1,6 @@
+import queryString from 'querystring';
 import React from 'react';
-import { Flex, reflex } from 'reflexbox';
+import { Flex } from 'reflexbox';
 import { withStyles } from 'material-ui/styles';
 import { Typography, Card } from 'material-ui';
 import { compose, lifecycle } from 'recompose';
@@ -29,9 +30,15 @@ export default compose(
   withStyles(styles),
   lifecycle({
     componentDidMount () {
-      const {initExampleProduct} = this.props;
+      const {initExampleProduct, loadProduct} = this.props;
+      const urlParams = document.location.search && queryString.parse(document.location.search.substring(1));
 
-      initExampleProduct();
+      if (!urlParams || !urlParams.url) {
+        initExampleProduct();
+        return;
+      }
+
+      loadProduct(urlParams.url);
     }
   })
 )(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {}, currency }) => (

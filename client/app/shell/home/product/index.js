@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { loadExampleProduct } from './redux';
+import { loadProduct, loadExampleProduct } from './redux';
 import Product from './product';
 
 const calculatePricesByCurrency = (product, currencies, selectedCurrency) => ({
@@ -20,5 +20,8 @@ export default connect(
   }), dispatch => ({
     initExampleProduct () {
       dispatch(loadExampleProduct());
+    },
+    loadProduct (url) {
+      dispatch(loadProduct(url));
     }
   }))(Product);

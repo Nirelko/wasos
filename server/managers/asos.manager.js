@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ProductResource from '../resoucres/product.resource';
 import storeList from '../constants/store-list.json';
-import { findJsonInText } from '../common/utils';
+import { findJsonInText, extractPidFromUrl } from '../common/utils';
 
 class AsosManager {
   constructor () {
@@ -20,17 +20,6 @@ class AsosManager {
     };
   }
 
-  extractPidFromUrl (url) {
-    const pidStartIndex = url.indexOf('prd/') + 'prd/'.length;
-    let pidEndIndex = url.indexOf('?', pidStartIndex);
-
-    if (pidEndIndex === -1) {
-      pidEndIndex = url.length;
-    }
-
-    return url.substring(pidStartIndex, pidEndIndex);
-  }
-
   getDetailsByStore (pid, store) {
     return this.productResource.getDetailsByStore(pid, store)
       .then(([product]) => product ?
@@ -39,7 +28,7 @@ class AsosManager {
   }
 
   loadStoresDetails (url) {
-    const pid = this.extractPidFromUrl(url);
+    const pid = extractPidFromUrl(url);
 
     return Promise.all(_.map(storeList, x => this.getDetailsByStore(pid, x)));
   }
@@ -70,7 +59,7 @@ class AsosManager {
   getProductDetails (url) {
     return this.loadBasicDetails(url)
       .then(({name, images, sizeNames}) => this.loadStoresDetails(url)
-        .then(stocskAndPrices => ({name, images, storesDetails: this.calculateStoreDetails(sizeNames, stocskAndPrices)})));
+        .then(stocskAndPrices => ({name, images, storesDetails: this.calculateStoreDetails(sizeNames, stocskAndPrices), url})));
   }
 }
 

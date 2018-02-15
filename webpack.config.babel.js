@@ -1,6 +1,6 @@
-import { join } from 'path';
+import {join} from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack, { HotModuleReplacementPlugin, NamedModulesPlugin } from 'webpack';
+import webpack, {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack';
 
 const clientPort = 8080;
 
@@ -33,7 +33,7 @@ module.exports = {
         use: [
           {
             loader: 'url-loader',
-            options: { limit: 10000 }
+            options: {limit: 10000}
           }
         ]
       },

@@ -26,7 +26,10 @@ export default compose(
     onProductSearch: props => ({url}) => {
       const { loadProduct, history } = props;
 
-      history.push(`/?${stringify({url})}`);
+      history.push({
+        pathname: '/',
+        search: `?${stringify({url})}`
+      });
       loadProduct({url});
     }
   })

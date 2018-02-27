@@ -1,3 +1,8 @@
-import MoneyResource from '../../resoucres/money.resource';
+import _ from 'lodash';
+import currencyToCountryCodeMap from 'currency-code-map';
 
-export const getCurrencies = () => new MoneyResource().get();
+import MoneyResource from '../../resoucres/money.resource';
+import LocationResource from '../../resoucres/location.resource';
+
+export const getCurrencies = ({ connection: { remoteAddress } }) => new LocationResource().getByIp(_.last(remoteAddress.split(':')))
+  .then(({ country_code: countryCode }) => new MoneyResource().get(currencyToCountryCodeMap[countryCode]));

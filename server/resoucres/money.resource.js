@@ -5,9 +5,9 @@ class MoneyResource extends BasicResource {
     super('https://api.fixer.io/');
   }
 
-  get () {
-    return this.client.get('latest?base=ILS')
-      .then(({data: {rates}}) => ({...rates, ILS: 1}));
+  get (baseCurrency = 'USD') {
+    return this.client.get(`latest?base=${baseCurrency}`)
+      .then(({data: {rates}}) => ({...rates, [baseCurrency]: 1}));
   }
 }
 

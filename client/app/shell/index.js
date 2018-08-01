@@ -5,7 +5,6 @@ import {compose} from 'recompose';
 
 import Header from './header';
 import Routes from './rotues';
-import Footer from './footer';
 
 const styles = {
   appContainer: {
@@ -21,6 +20,5 @@ export default compose(
     <Flex column auto>
       <Routes />
     </Flex>
-    {/* <Footer /> */}
   </Flex>
 ));

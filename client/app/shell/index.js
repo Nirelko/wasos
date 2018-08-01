@@ -1,6 +1,6 @@
 import React from 'react';
 import {Flex} from 'reflexbox';
-import {withStyles} from 'material-ui/styles';
+import {withStyles} from '@material-ui/core';
 import {compose} from 'recompose';
 
 import Header from './header';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuItem, Select } from 'material-ui';
+import { MenuItem, Select } from '@material-ui/core';
 import { compose, lifecycle } from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import _ from 'lodash';

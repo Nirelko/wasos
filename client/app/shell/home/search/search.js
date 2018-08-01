@@ -1,6 +1,6 @@
 import { stringify } from 'querystring';
 import React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
+import {withStyles} from '@material-ui/core';
 import Flex from 'reflexbox/dist/Flex';
 import {reduxForm} from 'redux-form';
 import {compose, withHandlers} from 'recompose';

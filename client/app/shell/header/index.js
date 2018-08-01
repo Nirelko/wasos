@@ -1,6 +1,5 @@
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
-import {withStyles} from 'material-ui/styles';
+import {withStyles, AppBar} from '@material-ui/core';
 import {Flex} from 'reflexbox';
 import {compose} from 'recompose';
 

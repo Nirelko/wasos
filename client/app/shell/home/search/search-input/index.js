@@ -1,7 +1,5 @@
 import React from 'react';
-import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
-import {withStyles} from 'material-ui/styles';
+import {Paper, IconButton, withStyles} from '@material-ui/core';
 import {Flex, reflex} from 'reflexbox';
 import { Magnify } from 'mdi-material-ui';
 import {TextField} from 'redux-form-material-ui';

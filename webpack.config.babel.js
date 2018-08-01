@@ -56,6 +56,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.less', '.css', '.html']
   },
+  mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
     hot: true,

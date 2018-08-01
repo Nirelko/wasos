@@ -1,13 +1,13 @@
 import BasicResource from './basic.resource';
 
 class LocationResource extends BasicResource {
-  constructor () {
-    super('http://freegeoip.net/json/');
+  constructor() {
+    super('http://api.ipstack.com/');
   }
 
-  getByIp (ip) {
-    return this.client.get(
-      `/${ip}`)
+  getByIp(ip) {
+  // eslint-disable-next-line camelcase
+    return this.client.get(`/${ip}`, {params: {access_key: process.env.LOCATION_API_KEY}})
       .then(({data}) => data);
   }
 }

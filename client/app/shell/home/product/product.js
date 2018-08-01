@@ -1,9 +1,8 @@
 import queryString from 'querystring';
 import React from 'react';
-import { Flex } from 'reflexbox';
-import { withStyles } from 'material-ui/styles';
-import { Typography, Card } from 'material-ui';
-import { compose, lifecycle } from 'recompose';
+import {Flex} from 'reflexbox';
+import {withStyles, Typography, Card} from '@material-ui/core';
+import {compose, lifecycle} from 'recompose';
 
 import StoresDetail from './stores-details';
 
@@ -35,13 +34,14 @@ export default compose(
 
       if (!urlParams || !urlParams.url) {
         initExampleProduct();
+
         return;
       }
 
       loadProduct(urlParams.url);
     }
   })
-)(({ classes: { image, container, productName, detailsCard, detailsContainer }, product = {}, currency }) => (
+)(({classes: {image, container, productName, detailsCard, detailsContainer}, product = {}, currency}) => (
   <Flex className={container} align='center'>
     <div>
       <Card>

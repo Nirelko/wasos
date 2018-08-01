@@ -1,7 +1,7 @@
 import React from 'react';
 import {Flex} from 'reflexbox';
 import Flag from 'react-world-flags';
-import {withStyles} from 'material-ui/styles';
+import {withStyles} from '@material-ui/core';
 import {compose} from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 

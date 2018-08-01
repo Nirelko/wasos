@@ -1,5 +1,5 @@
 import React from 'react';
-import withStyles from 'material-ui/styles/withStyles';
+import {withStyles} from '@material-ui/core';
 import {CurrencyEur, AlarmCheck, CurrencyUsd} from 'mdi-material-ui';
 import {compose} from 'recompose';
 import Flex from 'reflexbox/dist/Flex';

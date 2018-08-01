@@ -1,7 +1,6 @@
 import React from 'react';
 import {Flex} from 'reflexbox';
-import {withStyles} from 'material-ui/styles';
-import {cyan} from 'material-ui/colors';
+import {withStyles} from '@material-ui/core';
 import {compose} from 'recompose';
 
 import Preview from './preview';

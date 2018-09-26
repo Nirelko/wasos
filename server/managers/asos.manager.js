@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import ProductResource from '../resoucres/product.resource';
 import storeList from '../constants/store-list.json';
-import { findJsonInText, extractPidFromUrl } from '../common/utils';
+import {findJsonInText, extractPidFromUrl} from '../common/utils';
 
 class AsosManager {
   constructor () {

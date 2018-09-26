@@ -1,5 +1,5 @@
 import {AsyncRouter} from 'express-async-router';
-import { getProduct, getExampleProduct } from './product.controller';
+import {getProduct, getExampleProduct} from './product.controller';
 
 const productRouter = AsyncRouter();
 

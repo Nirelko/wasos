@@ -1,23 +1,9 @@
-import express from 'express';
-import { load } from 'dotenv-extended';
-import { json, urlencoded } from 'body-parser';
+import {load} from 'dotenv-extended';
 
-import api from './api';
-import urlProductExtractor from './middlewares/url-product-extractor';
-
-console.log('Server is loading...');
+import startMongoose from './config/db';
+import startServer from './config/express';
 
 load();
 
-console.log('Server finished loading');
-const serverIntance = express();
-const serverPort = process.env.ENV === 'production' ? 80 : 8000;
-
-serverIntance.use(urlencoded({ extended: false })); // support encoded bodies
-serverIntance.use(json()); // support json encoded bodies
-
-serverIntance.use('/api', api);
-
-serverIntance.use(urlProductExtractor());
-
-serverIntance.listen(serverPort, () => console.log(`Server listening at port ${serverPort}`));
+startMongoose()
+  .then(() => startServer());

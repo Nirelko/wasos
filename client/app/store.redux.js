@@ -1,24 +1,51 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import axiosMiddleware from 'redux-axios-middleware';
 import reduxLogger from 'redux-logger';
-import { reducer as form } from 'redux-form';
+import {reducer as form} from 'redux-form';
 import axios from 'axios';
+import simplePromiseMiddleware, {resolve, reject} from 'redux-simple-promise';
+import {composeWithDevTools} from 'redux-devtools-extension';
+import {connectRouter, routerMiddleware} from 'connected-react-router';
 
-import productSearch from './shell/home/product/redux';
-import currencies from './shell/header/currency-chooser/redux';
+import history from './history';
+import productSearch from './routes/shell/home/product/redux';
+import currencies from './routes/shell/header/currency-chooser/redux';
+import auth from './routes/exterior/login/redux';
+import users from './routes/exterior/register/redux';
+import tokenManager from '../common/token-manager';
+
 
 const axiosClient = axios.create({
   baseURL: '/api'
 });
 
+axiosClient.interceptors.request.use(config => {
+  const auth = tokenManager.get('auth');
+
+  if (!auth) {
+    return config;
+  }
+
+  config.headers.authorization = `Bearer ${auth.token}`;
+
+  return config;
+});
+
 export default createStore(
-  combineReducers({
-    productSearch,
-    currencies,
-    form
-  }),
-  applyMiddleware(
-    axiosMiddleware(axiosClient),
+  connectRouter(history)(
+    combineReducers({
+      productSearch,
+      currencies,
+      auth,
+      users,
+      form
+    })),
+  composeWithDevTools(applyMiddleware(
+    axiosMiddleware(axiosClient, {
+      successSuffix: resolve(''),
+      errorSuffix: reject('')
+    }),
     reduxLogger,
-  )
-);
+    simplePromiseMiddleware(),
+    routerMiddleware(history)
+  )));

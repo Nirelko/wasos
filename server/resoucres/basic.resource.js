@@ -1,4 +1,4 @@
-import { create } from 'axios';
+import {create} from 'axios';
 
 class BasicResource {
   constructor (baseURL) {

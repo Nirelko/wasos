@@ -57,7 +57,7 @@
 	},
 	"Israel": {
 		"store": "COM",
-		"currency": "USD",
+		"currency": "GBP",
 		"countryCode": "IL",
 		"sizeSchema": "EU",
 		"relatedCountries": "Rest Of The World"

@@ -1,13 +1,22 @@
+import _ from 'lodash';
+
 import BasicResource from './basic.resource';
+
+const removeBaseCurrencyName = (currentCurrency, baseCurrency) => currentCurrency.substring(baseCurrency.length);
 
 class MoneyResource extends BasicResource {
   constructor () {
-    super(`http://data.fixer.io/api/latest?access_key=${process.env.CURRENCY_API_KEY}&format=1`);
+    super(`http://apilayer.net/api/live`);
   }
 
   get (baseCurrency = 'USD') {
-    return this.client.get(`latest?base=${baseCurrency}`)
-      .then(({data: {rates}}) => ({...rates, [baseCurrency]: 1}));
+    return this.client.get('', {
+      params: {
+        source: baseCurrency,
+        access_key: process.env.CURRENCY_API_KEY
+      }
+    })
+      .then(({data: {quotes: rates}}) => Object.assign(..._.map(rates, (value, currencyName) => ({[removeBaseCurrencyName(currencyName, baseCurrency)]: value}))));
   }
 }
 

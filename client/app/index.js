@@ -1,18 +1,19 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
 import {MuiThemeProvider} from '@material-ui/core';
 import {Provider} from 'react-redux';
+import {ConnectedRouter} from 'connected-react-router';
 
-import store from './store.redux';
 import theme from './theme';
-import Shell from './shell';
+import store from './store.redux';
+import history from './history';
+import Routes from './routes';
 
 export default () => (
   <MuiThemeProvider theme={theme}>
     <Provider store={store}>
-      <BrowserRouter>
-        <Shell />
-      </BrowserRouter>
+      <ConnectedRouter history={history}>
+        <Routes />
+      </ConnectedRouter>
     </Provider>
   </MuiThemeProvider>
 );

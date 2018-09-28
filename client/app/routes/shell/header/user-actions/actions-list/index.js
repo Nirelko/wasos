@@ -1,19 +1,13 @@
-import React from 'react';
-import {withStyles, IconButton} from '@material-ui/core';
-import {compose} from 'recompose';
-import {AccountCircle} from 'mdi-material-ui';
+import {connect} from 'react-redux';
 
-const style = {
-  accountIcon: {
-    height: '36px',
-    width: '36px'
-  }
-};
+import tokenManager from '../../../../../../common/token-manager';
+import {localLogout} from '../../../../exterior/login/redux';
+import ActionsList from './actions-list';
 
-export default compose(
-  withStyles(style)
-)(({classes: {accountIcon}}) => (
-  <IconButton>
-    <AccountCircle className={accountIcon}/>
-  </IconButton>
-));
+export default connect(() => ({}),
+  dispatch => ({
+    localLogout: credentials => {
+      dispatch(localLogout(credentials));
+      tokenManager.remove('auth');
+    }
+  }))(ActionsList);

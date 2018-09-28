@@ -3,7 +3,7 @@ import moment from 'moment';
 const TOKEN_LIFE_SPAN = moment.duration(5, 'days').asMilliseconds();
 
 class TokenManager {
-  add  (name, data) {
+  add (name, data) {
     localStorage.setItem(name, JSON.stringify({
       data,
       creationDate: moment.now()

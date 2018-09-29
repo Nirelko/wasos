@@ -5,7 +5,6 @@ import {compose} from 'recompose';
 
 import Preview from './preview';
 import QuickSearchTutorial from './quick-search-tutorial';
-import Search from './search';
 import Product from './product';
 
 const styles = theme => ({
@@ -21,7 +20,6 @@ export default compose(
   <div>
     <Flex className={contentCard} column>
       <Preview />
-      <Search />
       <QuickSearchTutorial />
     </Flex>
     <Product />

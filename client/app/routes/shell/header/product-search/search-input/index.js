@@ -9,38 +9,40 @@ import _ from 'lodash';
 
 const styles = theme => ({
   inputContainer: {
-    padding: '16px'
+    padding: '8px'
   },
   input: {
     transition: 'all 0.3s',
-    padding: '16px'
+    padding: '8px'
   },
-  buttonContainer: {
-    background: theme.palette.grey[200]
+  buttonWrapper: {
+    background: theme.palette.grey[200],
+    borderRadius: '4px'
   },
   root: {
-    transition: 'all 0.3s'
+    transition: 'all 0.3s',
+    height: '40px',
+    width: '40px'
   }
 });
 
 const ReflexPaper = reflex(Paper);
-const ReflexTexField = reflex(Field);
+const ReflexField = reflex(Field);
 
 export default compose(
   withStyles(styles)
-)(({classes: {input, buttonContainer, root}, text, onClick = _.noop, disabled}) => (
-  <ReflexPaper flex>
-    <ReflexTexField
+)(({classes: {input, buttonWrapper, iconButton, buttonContainer, root}, text, onClick = _.noop, disabled}) => (
+  <ReflexPaper flex auto align='center'>
+    <ReflexField
       name='url'
       component={TextField}
       InputProps={{disableUnderline: true, classes: {input}}}
-      flex
-      auto
+      fullWidth
       placeholder={text}
       disabled={disabled}
     />
-    <Flex column justify='center' className={buttonContainer}>
-      <IconButton classes={{root}} type='submit' onClick={onClick} disabled={disabled}>
+    <Flex column justify='center' className={buttonWrapper}>
+      <IconButton className={iconButton} classes={{root}} type='submit' onClick={onClick} disabled={disabled}>
         <Magnify />
       </IconButton>
     </Flex>

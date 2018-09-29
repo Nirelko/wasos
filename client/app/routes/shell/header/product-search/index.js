@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import {loadProduct} from '../product/redux';
+import {loadProduct} from '../../home/product/redux';
 import Search from './search';
 
 export default connect(

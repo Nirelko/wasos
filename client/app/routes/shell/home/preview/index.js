@@ -5,6 +5,9 @@ import {compose} from 'recompose';
 import Flex from 'reflexbox/dist/Flex';
 
 const styles = {
+  container: {
+    padding: '48px 0'
+  },
   title: {
     fontSize: '40px',
     marginBottom: '20px'
@@ -24,8 +27,8 @@ const styles = {
 
 export default compose(
   withStyles(styles)
-)(({classes: {title, subTitle, mainIcon, subIcon}}) => (
-  <Flex auto>
+)(({classes: {title, subTitle, mainIcon, subIcon, container}}) => (
+  <Flex auto className={container}>
     <Flex auto column align='center' justify='center'>
       <span className={title}>Save your time and money</span>
       <span className={subTitle}>Find your size at the best price of Asos products</span>

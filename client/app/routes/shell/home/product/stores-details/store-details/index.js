@@ -22,7 +22,7 @@ const styles = {
 
 export default compose(
   withStyles(styles)
-)(({classes, price, relatedCountries, countryCode, currency, stockSizes = [], doesntExist}) => (
+)(({classes, price, relatedCountries, countryCode, currency, originalCurrency, stockSizes = [], doesntExist}) => (
   <Flex column align='center' className={classes.contianer}>
     <Flag code={countryCode} height='36' />
     <span className={classes.countries}>Related: {relatedCountries}</span>
@@ -31,6 +31,7 @@ export default compose(
         <span className={classes.notAvailable}>Not available at this country</span>
       ) : (
         <Flex column align='center'>
+          <span>Use: {originalCurrency}</span>
           <span>{getSymbolFromCurrency(currency)}{price}</span>
           <span className={classes.stockSizes}>Sizes In Stock:</span>
           {

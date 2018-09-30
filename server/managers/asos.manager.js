@@ -1,9 +1,10 @@
 import axios from 'axios';
-import _ from 'lodash';
+import {head, orderBy, map, flatten} from 'lodash';
 
 import ProductResource from '../resoucres/product.resource';
 import storeList from '../constants/store-list.json';
 import {findJsonInText, extractPidFromUrl} from '../common/utils';
+import CurrencyManager from './currency.manager';
 
 class AsosManager {
   constructor () {
@@ -20,17 +21,21 @@ class AsosManager {
     };
   }
 
+  findCheapestProduct (productDetailsPrices) {
+    return head(orderBy(productDetailsPrices, ({productPrice: {currency, current: {value}}}) => CurrencyManager.convert(value, currency, 'USD')));
+  }
+
   getDetailsByStore (pid, store) {
-    return this.productResource.getDetailsByStore(pid, store)
-      .then(([product]) => product ?
-        this.formatDetailsByStore(product, store) :
+    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, currency})))
+      .then((productDetailsPrices) => productDetailsPrices.length && productDetailsPrices[0].length ?
+        this.formatDetailsByStore(this.findCheapestProduct(flatten(productDetailsPrices)), store) :
         {relatedCountries: store.relatedCountries, countryCode: store.countryCode, doesntExist: true});
   }
 
   loadStoresDetails (url) {
     const pid = extractPidFromUrl(url);
 
-    return Promise.all(_.map(storeList, x => this.getDetailsByStore(pid, x)));
+    return Promise.all(map(storeList, x => this.getDetailsByStore(pid, x)));
   }
 
   loadBasicDetails (url) {
@@ -47,7 +52,7 @@ class AsosManager {
   }
 
   calculateStoreDetails (sizeNames, stocskAndPrices) {
-    return _.orderBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
+    return orderBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
       price,
       currency,
       relatedCountries,

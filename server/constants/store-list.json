@@ -1,65 +1,87 @@
 {
-	"unitedStates": {
-		"store": "US",
-		"currency": "USD",
-		"sizeSchema": "US",
-		"countryCode": "US",
-		"relatedCountries": "United States"
-	},
-	"unitedKingdom": {
-		"store": "COM",
-		"currency": "GBP",
-		"sizeSchema": "UK",
-		"countryCode": "GB",
-		"relatedCountries": "United Kingdom"
-	},
-	"spain": {
-		"store": "ES",
-		"currency": "EUR",
-		"countryCode": "ES",
-		"sizeSchema": "ES",
-		"relatedCountries": "Spain"
-	},
-	"russia": {
-		"store": "RU",
-		"currency": "RUB",
-		"countryCode": "RU",
-		"sizeSchema": "RU",
-		"relatedCountries": "Russia"
-	},
-	"GIF": {
-		"store": "IT",
-		"currency": "EUR",
-		"countryCode": "IT",
-		"sizeSchema": "IT",
-		"relatedCountries": "Italy, Germany, France"
-	},
-	"Australia": {
-		"store": "AU",
-		"currency": "AUD",
-		"countryCode": "AU",
-		"sizeSchema": "AU",
-		"relatedCountries": "Australia"
-	},
-	"HongKong": {
-		"store": "COM",
-		"currency": "HKD",
-		"countryCode": "HK",
-		"sizeSchema": "UK",
-		"relatedCountries": "Hong Kong"
-	},
-	"Greece": {
-		"store": "COM",
-		"currency": "EUR",
-		"countryCode": "GR",
-		"sizeSchema": "UK",
-		"relatedCountries": "Rest Of Europe"
-	},
-	"Israel": {
-		"store": "COM",
-		"currency": "GBP",
-		"countryCode": "IL",
-		"sizeSchema": "EU",
-		"relatedCountries": "Rest Of The World"
-	}
+  "unitedStates": {
+    "store": "US",
+    "currencies": [
+      "USD"
+    ],
+    "sizeSchema": "US",
+    "countryCode": "US",
+    "relatedCountries": "United States"
+  },
+  "unitedKingdom": {
+    "store": "COM",
+    "currencies": [
+      "GBP"
+    ],
+    "sizeSchema": "UK",
+    "countryCode": "GB",
+    "relatedCountries": "United Kingdom"
+  },
+  "spain": {
+    "store": "ES",
+    "currencies": [
+      "EUR"
+    ],
+    "countryCode": "ES",
+    "sizeSchema": "ES",
+    "relatedCountries": "Spain"
+  },
+  "russia": {
+    "store": "RU",
+    "currencies": [
+      "RUB"
+    ],
+    "countryCode": "RU",
+    "sizeSchema": "RU",
+    "relatedCountries": "Russia"
+  },
+  "GIF": {
+    "store": "IT",
+    "currencies": [
+      "EUR",
+      "CHF"
+    ],
+    "countryCode": "IT",
+    "sizeSchema": "IT",
+    "relatedCountries": "Italy, Germany, France"
+  },
+  "Australia": {
+    "store": "AU",
+    "currencies": [
+      "AUD"
+    ],
+    "countryCode": "AU",
+    "sizeSchema": "AU",
+    "relatedCountries": "Australia"
+  },
+  "HongKong": {
+    "store": "COM",
+    "currencies": [
+      "HKD",
+      "GBP"
+    ],
+    "countryCode": "HK",
+    "sizeSchema": "UK",
+    "relatedCountries": "Hong Kong"
+  },
+  "Greece": {
+    "store": "COM",
+    "currencies": [
+      "EUR",
+      "GBP"
+    ],
+    "countryCode": "GR",
+    "sizeSchema": "UK",
+    "relatedCountries": "Rest Of Europe"
+  },
+  "Israel": {
+    "store": "COM",
+    "currencies": [
+      "GBP",
+      "USD"
+    ],
+    "countryCode": "IL",
+    "sizeSchema": "EU",
+    "relatedCountries": "Rest Of The World"
+  }
 }

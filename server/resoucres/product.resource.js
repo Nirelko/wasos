@@ -2,12 +2,18 @@ import BasicResource from './basic.resource';
 
 class ProductResource extends BasicResource {
   constructor () {
-    super('http://m.asos.com/api/');
+    super('http://asos.com/api/');
   }
 
-  getDetailsByStore (id, {store, currency, sizeSchema, countryCode}) {
-    return this.client.get(
-      `/product/catalogue/v2/stockprice?productIds=${id}&store=${store}&currency=${currency}&keyStoreDataversion=2&sizeSchema=${sizeSchema}&country=${countryCode}`)
+  getDetailsByStore (id, {store, currency, countryCode}) {
+    return this.client.get('product/catalogue/v2/stockprice', {
+      params: {
+        productIds: id,
+        store,
+        currency,
+        countryCode
+      }
+    })
       .then(({data}) => data);
   }
 }

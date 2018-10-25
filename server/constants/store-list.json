@@ -55,7 +55,7 @@
     "relatedCountries": "Australia"
   },
   "HongKong": {
-    "store": "COM",
+    "store": "ROW",
     "currencies": [
       "HKD",
       "GBP"
@@ -65,7 +65,7 @@
     "relatedCountries": "Hong Kong"
   },
   "Greece": {
-    "store": "COM",
+    "store": "ROE",
     "currencies": [
       "EUR",
       "GBP"
@@ -75,10 +75,11 @@
     "relatedCountries": "Rest Of Europe"
   },
   "Israel": {
-    "store": "COM",
+    "store": "ROW",
     "currencies": [
       "GBP",
-      "USD"
+      "USD",
+      "ILS"
     ],
     "countryCode": "IL",
     "sizeSchema": "EU",

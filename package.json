@@ -7,7 +7,8 @@
     "dev": "run-p client-dev server-dev",
     "lint": "eslint --fix --ignore-path .gitignore .",
     "client-dev": "webpack-dev-server",
-    "server-dev": "nodemon -r babel-register --inspect=5858 --watch ./server ./server/ --ignore ./node_modules"
+    "server-dev": "nodemon -r babel-register --inspect=5858 --watch ./server ./server/ --ignore ./node_modules",
+    "seed": "node -r babel-register ./commands/seed.js"
   },
   "repository": {
     "type": "git",

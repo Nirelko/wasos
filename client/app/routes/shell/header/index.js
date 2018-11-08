@@ -18,7 +18,7 @@ const ToolBarStyle = theme => ({
     borderRadios: '0 !important'
   },
   titleContainer: {
-    marginLeft: '5%'
+    marginLeft: '2%'
   },
   appIcon: {
     height: '64px',
@@ -32,8 +32,8 @@ export default compose(
   withStyles(ToolBarStyle)
 )(({classes: {toolBar, titleContainer, appIcon}}) => (
   <AppBar className={toolBar}>
-    <Flex className={titleContainer} align='center'>
-      <Flex>
+    <Flex align='center'>
+      <Flex className={titleContainer} align='center' justify='center'>
         <img src={appIconSrc} className={appIcon} />
       </Flex>
       <FlexSearch flex auto />

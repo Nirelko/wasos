@@ -1,7 +1,6 @@
 import React from 'react';
-import {Plus} from 'mdi-material-ui';
+import {EyePlus} from 'mdi-material-ui';
 import {withStyles, IconButton} from '@material-ui/core';
-import {green} from '@material-ui/core/colors';
 import {compose} from 'recompose';
 
 const ToolBarStyle = {
@@ -9,15 +8,12 @@ const ToolBarStyle = {
     height: '36px',
     width: '36px'
   },
-  iconButton: {
-    color: green[600]
-  }
 };
 
 export default compose(
   withStyles(ToolBarStyle)
-)(({classes: {iconButton, icon}}) => (
-  <IconButton className={iconButton}>
-    <Plus className={icon} />
+)(({classes: {icon}}) => (
+  <IconButton>
+    <EyePlus className={icon} />
   </IconButton>
 ));

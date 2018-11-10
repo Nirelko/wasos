@@ -7,7 +7,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 
 const styles = {
   contianer: {
-    margin: '25px'
+    margin: '64px 25px 0'
   },
   countries: {
     marginTop: '24px'

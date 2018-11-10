@@ -34,12 +34,12 @@ class AsosManager {
       {relatedCountries: store.relatedCountries, countryCode: store.countryCode, doesntExist: true};
   }
 
-  getDetailsByCurrencies (store, pid) {
-    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, currency})));
+  getDetailsByCurrencies (pid, store, keyStoreDataversion) {
+    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, keyStoreDataversion, currency})));
   }
 
-  getDetailsByStore (pid, store) {
-    return this.getDetailsByCurrencies(store, pid)
+  getDetailsByStore (pid, store, keyStoreDataversion) {
+    return this.getDetailsByCurrencies(pid, store, keyStoreDataversion, pid)
       .then(productDetailsPrices => this.formatDetailsByAvailability(productDetailsPrices, store));
   }
 
@@ -48,9 +48,9 @@ class AsosManager {
       .then(x => x.map(y => y.toObject()));
   }
 
-  loadStoresDetails (id) {
+  loadStoresDetails (id, keyStoreDataversion) {
     return this.getAllStores()
-      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x))));
+      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion))));
   }
 
   calculateStoreDetails (sizeNames, stocskAndPrices) {
@@ -66,7 +66,9 @@ class AsosManager {
   loadProductBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
-        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
+        const productDetailsJson = findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length);
+        let productDetails = JSON.parse(productDetailsJson);
+        const {regionalStore: {keyStoreDataversion}} = JSON.parse(findJsonInText(data, data.lastIndexOf('siteChromeInitialStore = ')));
 
         if (productDetails.products) {
           [productDetails] = productDetails.products; // TODO: Add feature of choosing which product to show on multiple products option
@@ -79,14 +81,15 @@ class AsosManager {
           id,
           name,
           sizeNames: variants.map(x => x.size),
-          images: images.map(x => x.url)
+          images: images.map(x => x.url),
+          keyStoreDataversion
         };
       });
   }
 
   getProductDetails (url) {
     return this.loadProductBasicDetails(url)
-      .then(({id, name, images, sizeNames}) => this.loadStoresDetails(id)
+      .then(({id, name, images, sizeNames, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion)
         .then(stocksAndPrices => ({
           name,
           images,

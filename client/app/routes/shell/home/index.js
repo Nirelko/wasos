@@ -8,6 +8,9 @@ import QuickSearchTutorial from './quick-search-tutorial';
 import Product from './product';
 
 const styles = theme => ({
+  background: {
+    background: '#eeeeee'
+  },
   contentCard: {
     background: theme.palette.primary[600],
     color: 'white'
@@ -16,8 +19,8 @@ const styles = theme => ({
 
 export default compose(
   withStyles(styles)
-)(({classes: {contentCard}}) => (
-  <div>
+)(({classes: {background, contentCard}}) => (
+  <div className={background}>
     <Flex className={contentCard} column>
       <Preview />
       <QuickSearchTutorial />

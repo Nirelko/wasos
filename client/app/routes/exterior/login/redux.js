@@ -3,6 +3,8 @@ import {resolve, reject} from 'redux-simple-promise';
 import {NOT_FOUND} from 'http-status-codes';
 import _ from 'lodash';
 
+import {addWatch, removeWatch} from '../../shell/home/product/header/header-actions/watch-actions/redux';
+
 export const {login, localLogin, localLogout} = createActions({
   LOGIN: credentials => ({
     request: {
@@ -28,5 +30,13 @@ export default handleActions({
   [localLogin]: (state, {payload: loginData}) => ({
     ...loginData
   }),
-  [localLogout]: () => ({})
+  [localLogout]: () => ({}),
+  [resolve(addWatch)]: (state, {payload: {data: user}}) => ({
+    ...state,
+    user
+  }),
+  [resolve(removeWatch)]: (state, {payload: {data: user}}) => ({
+    ...state,
+    user
+  })
 }, {});

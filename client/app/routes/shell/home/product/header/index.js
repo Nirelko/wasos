@@ -3,7 +3,7 @@ import {Flex, reflex} from 'reflexbox';
 import {withStyles, Typography} from '@material-ui/core';
 import {compose} from 'recompose';
 
-import WatchListAddButton from './watch-list-add-button';
+import Actions from './header-actions';
 
 const ReflexTypography = reflex(Typography);
 
@@ -13,15 +13,15 @@ const styles = {
     position: 'absolute',
     top: '8px',
     left: '416px',
-    right: '0'
+    right: '8px'
   }
 };
 
 export default compose(
   withStyles(styles)
-)(({classes: {container}, name}) => (
+)(({classes: {container, actions}, name}) => (
   <Flex className={container} type='title' align='center'>
-    <ReflexTypography flex auto type='title' variant='subheading'> {name} </ReflexTypography>
-    <WatchListAddButton />
+    <ReflexTypography flex auto type='title' variant='subtitle1'> {name} </ReflexTypography>
+    <Actions className={actions} />
   </Flex>
 ));

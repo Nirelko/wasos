@@ -4,7 +4,7 @@ import {Flex} from 'reflexbox';
 import {withStyles, Card} from '@material-ui/core';
 import {compose, lifecycle} from 'recompose';
 
-import ProductHeader from './product-header';
+import ProductHeader from './header';
 import StoresDetails from './stores-details';
 
 

@@ -27,6 +27,17 @@ class TokenManager {
     return item.data;
   }
 
+  replaceData (name, data) {
+    const item = localStorage.getItem(name);
+
+    if (!item) {
+      throw new Error(`Couldn't find the given local storage item ${name}`);
+    }
+
+    this.remove(name);
+    localStorage.setItem(name, JSON.stringify({...JSON.parse(item), data}));
+  }
+
   remove (name) {
     localStorage.removeItem(name);
   }

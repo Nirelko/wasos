@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
-import {sortBy, round} from 'lodash';
+import {sortBy} from 'lodash';
 
+import {convert} from '../../../../../common/utils';
 import {loadProduct, loadExampleProduct} from './redux';
 import Product from './product';
 
@@ -9,7 +10,7 @@ const calculatePricesByCurrency = (product, currencies, selectedCurrency) => ({
   storesDetails: sortBy(product.storesDetails.map(({currency: originalCurrency, ...x}) => ({
     ...x,
     originalCurrency,
-    price: round((x.price / currencies[originalCurrency]) * currencies[selectedCurrency], 2)
+    price: convert(x.price, currencies[originalCurrency], currencies[selectedCurrency])
   })), x => x.price)
 });
 

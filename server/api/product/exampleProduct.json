@@ -1,4 +1,5 @@
 {
+	"id": "test",
 	"name": "Example Product - adidas Originals Stan Smith Leather Trainers In White M20325",
 	"images": [
 		"http://images.asos-media.com/products/adidas-originals-stan-smith-leather-trainers-in-white-m20325/4601984-1-white",
@@ -118,5 +119,6 @@
 				"UK 13 - EU 48.5 - US 13.5"
 			]
 		}
-	]
+	],
+	"isExample": true
 }

@@ -24,8 +24,8 @@ export default compose(
 )(({classes: {blessing}, location: {state: {username}}}) => (
   <FlexCardContent column flex auto align='center'>
     <Flex auto column align='center' justify='center'>
-      <Typography variant='display2' paragraph={true} className={blessing}>Register Successfully!</Typography>
-      <Typography variant='display1'>Welcome {username} to wasos family!</Typography>
+      <Typography variant='h3' paragraph={true} className={blessing}>Register Successfully!</Typography>
+      <Typography variant='h4'>Welcome {username} to wasos family!</Typography>
     </Flex>
     <Typography variant='caption'>You will be moved to login in 5 seconds...</Typography>
   </FlexCardContent>

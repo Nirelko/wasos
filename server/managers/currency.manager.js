@@ -9,12 +9,13 @@ const CURRENCY_RELEVANT_SPAN = moment.duration(5, 'days').asMilliseconds();
 class CurrencyManager {
   constructor () {
     this.currency = null;
+    this.currencyPromise = null;
   }
 
   getUpdatedCurrencies () {
     return Currency.findOne()
       .then(currency => {
-        if (this.isCurrencyRelevant(currency)) {
+        if (this.isCurrencyNotDated(currency)) {
           this.currency = currency;
 
           return currency.currencies;
@@ -22,11 +23,16 @@ class CurrencyManager {
 
         return Currency.deleteMany({})
           .then(() => new MoneyResource().get())
-          .then(currencies => Currency.create({currencies}));
+          .then(currencies => Currency.create({currencies}))
+          .then(currency => {
+            this.currency = currency.toObject();
+
+            return currency.currencies;
+          });
       });
   }
 
-  isCurrencyRelevant (currency) {
+  isCurrencyNotDated (currency) {
     return currency && Date.now() - currency.creationDate < CURRENCY_RELEVANT_SPAN;
   }
 
@@ -35,9 +41,11 @@ class CurrencyManager {
   }
 
   get () {
-    return this.isCurrencyRelevant(this.currency) ?
+    this.currencyPromise = this.isCurrencyNotDated(this.currency) ?
       Promise.resolve(this.currency.currencies) :
       this.getUpdatedCurrencies();
+
+    return this.currencyPromise;
   }
 
   convert (value, baseCurrency, newCurrency) {

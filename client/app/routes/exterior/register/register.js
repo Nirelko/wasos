@@ -1,19 +1,16 @@
 import React from 'react';
-import {withStyles, Typography, Button, CardContent, InputAdornment} from '@material-ui/core';
+import {withStyles, Typography, Button, CardContent} from '@material-ui/core';
 import {AccountOutline, EmailOutline, Lock} from 'mdi-material-ui';
 import {Flex, reflex} from 'reflexbox';
 import {compose} from 'recompose';
-import {TextField} from 'redux-form-material-ui';
-import {reduxForm, Field} from 'redux-form';
+import {reduxForm} from 'redux-form';
 import {required, email} from 'redux-form-validators';
 
-import {isUsernameAvailable} from './redux';
+import IconTextField from '../../../../common/icon-text-field';
 import {validateBuilder, asyncValidatorBuilder, createAsyncValidator, matchField} from '../../../../common/form/validators';
+import {isUsernameAvailable} from './redux';
 
 const style = {
-  field: {
-    marginTop: '24px'
-  },
   button: {
     marginTop: '48px',
     color: 'white'
@@ -43,15 +40,15 @@ export default compose(
     validate: validateBuilder(validations),
     asyncValidate: asyncValidatorBuilder(asyncValidations)
   })
-)(({classes: {contentContainer, field, button}, register, handleSubmit, invalid, submitting}) => (
+)(({classes: {contentContainer, button}, register, handleSubmit, invalid, submitting}) => (
   <FlexCardContent column auto align='center' flex className={contentContainer}>
-    <Typography variant='headline'>
+    <Typography variant='h5'>
       <span>Create your account</span>
     </Typography>
-    <Field component={TextField} name='username' label='Username' className={field} fullWidth InputProps={{startAdornment: (<InputAdornment position='start'><AccountOutline /></InputAdornment>)}} />
-    <Field component={TextField} name='email' label='Email' className={field} fullWidth InputProps={{startAdornment: (<InputAdornment position='start'><EmailOutline /></InputAdornment>)}} />
-    <Field component={TextField} name='password' type='password' label='Password' className={field} fullWidth InputProps={{startAdornment: (<InputAdornment position='start'><Lock /></InputAdornment>)}} />
-    <Field component={TextField} name='repassword' type='password' label='Re-type password' className={field} fullWidth InputProps={{startAdornment: (<InputAdornment position='start'><Lock /></InputAdornment>)}} />
+    <IconTextField icon={AccountOutline} fieldProps={{name: 'username', label: 'Username'}} />
+    <IconTextField icon={EmailOutline} fieldProps={{name: 'email', label: 'Email'}} />
+    <IconTextField icon={Lock} fieldProps={{name: 'password', label: 'Password', type: 'password'}} />
+    <IconTextField icon={Lock} fieldProps={{name: 'repassword', label: 'Password', type: 'password'}} />
     <Flex auto />
     <Button type='submit' variant='contained' color='primary' fullWidth className={button} onClick={handleSubmit(register)} disabled={invalid || submitting}>
       <span>Register</span>

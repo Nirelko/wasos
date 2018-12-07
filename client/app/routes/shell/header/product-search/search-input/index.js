@@ -23,6 +23,10 @@ const styles = theme => ({
     transition: 'all 0.3s',
     height: '40px',
     width: '40px'
+  },
+  icon: {
+    position: 'relative',
+    bottom: '2px'
   }
 });
 
@@ -31,7 +35,7 @@ const ReflexField = reflex(Field);
 
 export default compose(
   withStyles(styles)
-)(({classes: {input, buttonWrapper, iconButton, buttonContainer, root}, text, onClick = _.noop, disabled}) => (
+)(({classes: {input, buttonWrapper, iconButton, root, icon}, text, onClick = _.noop, disabled}) => (
   <ReflexPaper flex auto align='center'>
     <ReflexField
       name='url'
@@ -43,7 +47,7 @@ export default compose(
     />
     <Flex column justify='center' className={buttonWrapper}>
       <IconButton className={iconButton} classes={{root}} type='submit' onClick={onClick} disabled={disabled}>
-        <Magnify />
+        <Magnify className={icon}/>
       </IconButton>
     </Flex>
   </ReflexPaper>

@@ -33,7 +33,7 @@ export default compose(
   reduxForm({form: 'login'})
 )(({classes: {contentContainer, field, button, registerButton, error}, invalid, submitting, handleSubmit, login, errorMessage}) => (
   <FlexCardContent column auto align='center' flex className={contentContainer}>
-    <Typography variant='headline'>
+    <Typography variant='h5'>
       <span>Login to your account</span>
     </Typography>
     <Field component={TextField} name='username' label='Username' className={field} fullWidth/>

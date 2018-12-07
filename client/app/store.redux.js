@@ -11,7 +11,8 @@ import history from './history';
 import productSearch from './routes/shell/home/product/redux';
 import currencies from './routes/shell/header/currency-chooser/redux';
 import auth from './routes/exterior/login/redux';
-import users from './routes/exterior/register/redux';
+import register from './routes/exterior/register/redux';
+import watches from './routes/shell/home/product/header/header-actions/watch-actions/redux';
 import tokenManager from '../common/token-manager';
 
 
@@ -37,7 +38,8 @@ export default createStore(
       productSearch,
       currencies,
       auth,
-      users,
+      register,
+      watches,
       form
     })),
   composeWithDevTools(applyMiddleware(

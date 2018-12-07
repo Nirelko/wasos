@@ -2,6 +2,7 @@ import React from 'react';
 import {withStyles, AppBar} from '@material-ui/core';
 import {Flex, reflex} from 'reflexbox';
 import {compose} from 'recompose';
+import {Link} from 'react-router-dom';
 
 import appIconSrc from '../../../../assests/app-icon.png';
 import ProductSearch from './product-search';
@@ -34,11 +35,13 @@ export default compose(
   <AppBar className={toolBar}>
     <Flex align='center'>
       <Flex className={titleContainer} align='center' justify='center'>
-        <img src={appIconSrc} className={appIcon} />
+        <Link to='/'>
+          <img src={appIconSrc} className={appIcon}/>
+        </Link>
       </Flex>
-      <FlexSearch flex auto />
-      <CurrencyChooser />
-      <UserActions />
+      <FlexSearch flex auto/>
+      <CurrencyChooser/>
+      <UserActions/>
     </Flex>
   </AppBar>
 ));

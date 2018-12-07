@@ -2,7 +2,7 @@ import axios from 'axios';
 import {head, orderBy, map, flatten, chain, value} from 'lodash';
 
 import ProductResource from '../../resoucres/product.resource';
-import {findJsonInText, extractPidFromUrl} from '../../common/utils';
+import {findJsonInText} from '../../common/utils';
 import CurrencyManager from '../currency.manager';
 import StoreDetails from './store-details';
 
@@ -53,21 +53,20 @@ class AsosManager {
       .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion))));
   }
 
-  calculateStoreDetails (sizeNames, stocskAndPrices) {
+  calculateStoreDetails (sizes, stocskAndPrices) {
     return orderBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
       price,
       currency,
       relatedCountries,
       countryCode,
-      stockSizes: sizeNames.filter((name, index) => sizesStock[index])
+      stockSizes: sizes.filter((size, index) => sizesStock[index]).map(x => x.name)
     } : {relatedCountries, countryCode, doesntExist}), x => x.price);
   }
 
   loadProductBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
-        const productDetailsJson = findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length);
-        let productDetails = JSON.parse(productDetailsJson);
+        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
         const {regionalStore: {keyStoreDataversion}} = JSON.parse(findJsonInText(data, data.lastIndexOf('siteChromeInitialStore = ')));
 
         if (productDetails.products) {
@@ -75,12 +74,13 @@ class AsosManager {
           productDetails.images = [productDetails.productImage];
         }
 
-        const {id, name, variants, images} = productDetails;
+        const {id, name, variants, images, sizeGuide} = productDetails;
 
         return {
           id,
           name,
-          sizeNames: variants.map(x => x.size),
+          sizeGuide,
+          sizes: variants.map(({size: name, variantId: id}) => ({id, name})),
           images: images.map(x => x.url),
           keyStoreDataversion
         };
@@ -89,11 +89,14 @@ class AsosManager {
 
   getProductDetails (url) {
     return this.loadProductBasicDetails(url)
-      .then(({id, name, images, sizeNames, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion)
+      .then(({id, name, images, sizeGuide, sizes, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion)
         .then(stocksAndPrices => ({
+          id: id.toString(),
           name,
           images,
-          storesDetails: this.calculateStoreDetails(sizeNames, stocksAndPrices),
+          sizeGuide,
+          storesDetails: this.calculateStoreDetails(sizes, stocksAndPrices),
+          sizes,
           url
         })
         ));

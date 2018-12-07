@@ -1,6 +1,8 @@
 import mongoose, {Schema, SchemaTypes} from 'mongoose';
 import bcryptPlugin from 'mongoose-bcrypt';
 
+import WatchSchema from './watch/watch.schema';
+
 const userSchema = new Schema({
   username: {
     type: String,
@@ -18,6 +20,10 @@ const userSchema = new Schema({
     required: true,
     select: false,
     bcrypt: true
+  },
+  watches: {
+    type: [WatchSchema],
+    default: []
   }
 });
 

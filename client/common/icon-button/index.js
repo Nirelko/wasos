@@ -11,9 +11,9 @@ const ToolBarStyle = {
 
 export default compose(
   withStyles(ToolBarStyle)
-)(({classes: {icon}, icon: ActionIcon, action, label}) => (
+)(({classes: {icon}, icon: ActionIcon, action, label, disabled}) => (
   <Tooltip title={label} placement='top'>
-    <IconButton onClick={action}>
+    <IconButton onClick={action} disabled={disabled}>
       <ActionIcon className={icon} />
     </IconButton>
   </Tooltip>

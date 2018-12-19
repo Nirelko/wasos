@@ -1,11 +1,18 @@
 import {createActions, handleActions} from 'redux-actions';
 import {resolve, reject} from 'redux-simple-promise';
 
-export const {addWatch, removeWatch} = createActions({
+export const {addWatch, updateWatch, removeWatch, removeWatches} = createActions({
   ADD_WATCH: ({username, ...watch}) => ({
     request: {
       url: `/user/${username}/watch`,
       method: 'post',
+      data: watch
+    }
+  }),
+  UPDATE_WATCH: (username, watch) => ({
+    request: {
+      url: `/user/${username}/watch`,
+      method: 'put',
       data: watch
     }
   }),
@@ -15,16 +22,36 @@ export const {addWatch, removeWatch} = createActions({
       method: 'delete',
       params: {productId}
     }
+  }),
+  REMOVE_WATCHES: (username, productsId) => ({
+    request: {
+      url: `/user/${username}/watch`,
+      method: 'delete',
+      data: {productsId}
+    }
   })
 });
 
+const FetchingState = state => ({
+  ...state,
+  isFetching: true
+});
+
+const rejectedState = ({isFetching, ...state}) => ({
+  ...state
+});
+
 export default handleActions({
-  [addWatch]: state => ({
-    ...state,
-    isFetching: true
-  }),
+  [addWatch]: FetchingState,
   [resolve(addWatch)]: () => ({}),
-  [reject(addWatch)]: state => ({
-    ...state
-  })
+  [reject(addWatch)]: rejectedState,
+  [updateWatch]: FetchingState,
+  [resolve(updateWatch)]: () => ({}),
+  [reject(updateWatch)]: rejectedState,
+  [removeWatch]: FetchingState,
+  [resolve(removeWatch)]: () => ({}),
+  [reject(removeWatch)]: rejectedState,
+  [removeWatches]: FetchingState,
+  [resolve(removeWatches)]: () => ({}),
+  [reject(removeWatches)]: rejectedState
 }, {});

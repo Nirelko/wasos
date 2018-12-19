@@ -53,7 +53,7 @@ export default compose(
       <Flex column p='8px 16px'>
         <Typography variant='h6'>Choose size and price to watch</Typography>
         <Typography variant='subtitle1'>We promise to email you =)</Typography>
-        <IconTextField icon={Cash} fieldProps={{name: 'price', label: 'Price'}} />
+        <IconTextField icon={Cash} fieldProps={{name: 'price', label: 'Price', fullWidth: true}} />
         <Typography variant='caption'>The current minimum price
             is: {minimumPrice}{getSymbolFromCurrency(selectedCurrency)}
         </Typography>

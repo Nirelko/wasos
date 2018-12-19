@@ -1,8 +1,8 @@
 import {connect} from 'react-redux';
 
 import tokenManager from '../../../../../../../../../common/token-manager';
-import {removeWatch} from '../redux';
-import CancelWatchAction from './cancel-watch-action';
+import {removeWatch} from '../../../../../../home/product/header/header-actions/watch-actions/redux';
+import DeleteAction from './delete-action';
 
 export default connect(
   ({auth: {user: {username}},
@@ -16,4 +16,4 @@ export default connect(
         user
       }))
   })
-)(CancelWatchAction);
+)(DeleteAction);

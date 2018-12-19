@@ -1,19 +1,8 @@
 import {Schema} from 'mongoose';
 
+import ProductSchema from '../../product/product.schema';
+
 export default new Schema({
-  product: {
-    id: {
-      type: String,
-      required: true
-    },
-    images: [String],
-    name: String,
-    url: String,
-    sizes: {
-      id: Number,
-      name: String
-    }
-  },
   sizeId: {
     type: Number,
     required: true
@@ -25,5 +14,6 @@ export default new Schema({
   currency: {
     type: String,
     required: true
-  }
+  },
+  product: ProductSchema
 });

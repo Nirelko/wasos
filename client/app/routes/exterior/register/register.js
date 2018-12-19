@@ -45,10 +45,10 @@ export default compose(
     <Typography variant='h5'>
       <span>Create your account</span>
     </Typography>
-    <IconTextField icon={AccountOutline} fieldProps={{name: 'username', label: 'Username'}} />
-    <IconTextField icon={EmailOutline} fieldProps={{name: 'email', label: 'Email'}} />
-    <IconTextField icon={Lock} fieldProps={{name: 'password', label: 'Password', type: 'password'}} />
-    <IconTextField icon={Lock} fieldProps={{name: 'repassword', label: 'Password', type: 'password'}} />
+    <IconTextField icon={AccountOutline} fieldProps={{name: 'username', label: 'Username', fullWidth: true}} />
+    <IconTextField icon={EmailOutline} fieldProps={{name: 'email', label: 'Email', fullWidth: true}} />
+    <IconTextField icon={Lock} fieldProps={{name: 'password', label: 'Password', type: 'password', fullWidth: true}} />
+    <IconTextField icon={Lock} fieldProps={{name: 'repassword', label: 'Password', type: 'password', fullWidth: true}} />
     <Flex auto />
     <Button type='submit' variant='contained' color='primary' fullWidth className={button} onClick={handleSubmit(register)} disabled={invalid || submitting}>
       <span>Register</span>

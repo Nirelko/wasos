@@ -16,7 +16,6 @@ export default compose(
   <Field
     component={TextField}
     className={field}
-    fullWidth
     InputProps={{startAdornment: (<InputAdornment position='start'><ButtonIcon /></InputAdornment>)}}
     {...fieldProps}
   />

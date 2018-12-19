@@ -12,13 +12,14 @@ export default compose(
 )(({removeWatch}) => (
   <DialogIconButton icon={EyeOff} label='Remove From Watch List' action={removeWatch}>
     {
-      ({isDialogOpen, toggleDialog}) => (<ConfirmDialog
-        open={isDialogOpen}
-        onClose={toggleDialog}
-        title='Remove Watch'
-        content='Are you sure you want to remove the product watch?'
-        action={removeWatch}
-      />)
+      ({isDialogOpen, toggleDialog}) => (
+        <ConfirmDialog
+          open={isDialogOpen}
+          onClose={toggleDialog}
+          title='Remove Watch'
+          content='Are you sure you want to remove the product watch?'
+          action={removeWatch}
+        />)
     }
   </DialogIconButton>
 )

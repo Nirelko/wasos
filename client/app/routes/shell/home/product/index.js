@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {sortBy} from 'lodash';
 
-import {convert} from '../../../../../common/utils';
+import {convert} from '../../../../../../common/utils';
 import {loadProduct, loadExampleProduct} from './redux';
 import Product from './product';
 

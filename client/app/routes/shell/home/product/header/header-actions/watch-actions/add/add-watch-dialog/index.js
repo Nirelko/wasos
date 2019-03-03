@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import _ from 'lodash';
 
-import {convert} from '../../../../../../../../../../common/utils';
+import {convert} from '../../../../../../../../../../../common/utils';
 import {addWatch} from '../../redux';
 import tokenManager from '../../../../../../../../../../common/token-manager';
 import WatchListAddDialog from './add-watch.dialog';

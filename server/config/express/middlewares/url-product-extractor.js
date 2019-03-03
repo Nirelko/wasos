@@ -1,6 +1,6 @@
 import queryString from 'querystring';
 
-import {extractPidFromUrl} from '../../../common/utils';
+import {extractPidFromUrl} from '../../../../common/utils';
 
 export default () => ({url}, res, next) => {
   const pid = extractPidFromUrl(url);

@@ -1,4 +1,5 @@
 import fs from 'fs';
+import {round} from 'lodash';
 
 export function findJsonInText (text, startIndex = 0) {
   const jsonStartIndex = text.indexOf('{', startIndex);
@@ -46,3 +47,5 @@ export function extractPidFromUrl (url) {
 
   return url.substring(pidStartIndex, pidEndIndex);
 }
+
+export const convert = (price, currentCurrency, targetCurrency) => round((price / currentCurrency) * targetCurrency, 2);

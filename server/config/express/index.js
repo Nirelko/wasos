@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import jwt from 'express-jwt';
 
 import api from '../../api';
+import WatchWorker from '../../workers/watch.worker';
 import urlProductExtractor from './middlewares/url-product-extractor';
 
 export default () => {
@@ -19,6 +20,8 @@ export default () => {
   serverIntance.use('/api', api);
 
   serverIntance.use(urlProductExtractor());
+
+  new WatchWorker().start();
 
   serverIntance.listen(serverPort, () => console.log(`Server listening at port ${serverPort}`));
 }

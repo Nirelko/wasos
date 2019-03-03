@@ -1,5 +1,5 @@
 import User from '../user/user.model';
-import {NOT_FOUND} from "http-status-codes";
+import {NOT_FOUND} from 'http-status-codes';
 import jwt from 'jsonwebtoken';
 
 const removeUnwantedFields = ({password, __v, ...user}) => user;

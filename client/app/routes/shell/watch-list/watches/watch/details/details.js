@@ -34,10 +34,10 @@ export default compose(
   <form onSubmit={handleSubmit(updateWatch)}>
     <ExpansionPanelDetails>
       <Grid container>
-        <Grid item xl={2} lg={4} md={6} xs={12}>
+        <Grid item xl={2} lg={4} sm={6} xs={12}>
           <IconTextField icon={Cash} classes={{field}} fieldProps={{name: 'price', label: 'Price'}} />
         </Grid>
-        <Grid item xl={2} lg={4} md={6} sm={6} xs={12}>
+        <Grid item xl={2} lg={4} sm={6} xs={12}>
           <SizeChooser sizes={sizes} />
         </Grid>
       </Grid>

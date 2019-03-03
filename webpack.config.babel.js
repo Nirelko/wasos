@@ -57,6 +57,9 @@ module.exports = {
     extensions: ['.js', '.less', '.css', '.html']
   },
   mode: 'development',
+  node: {
+    fs: 'empty'
+  },
   devtool: 'eval-source-map',
   devServer: {
     hot: true,

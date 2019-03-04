@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom';
 
 import appIconSrc from '../../../../assests/app-icon.png';
 import ProductSearch from './product-search';
-import CurrencyChooser from './currency-chooser';
 import UserActions from './user-actions';
 
 const ToolBarStyle = theme => ({
@@ -36,12 +35,11 @@ export default compose(
     <Flex align='center'>
       <Flex className={titleContainer} align='center' justify='center'>
         <Link to='/'>
-          <img src={appIconSrc} className={appIcon}/>
+          <img src={appIconSrc} className={appIcon} />
         </Link>
       </Flex>
-      <FlexSearch flex auto/>
-      <CurrencyChooser/>
-      <UserActions/>
+      <FlexSearch flex auto />
+      <UserActions />
     </Flex>
   </AppBar>
 ));

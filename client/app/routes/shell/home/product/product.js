@@ -1,12 +1,13 @@
 import queryString from 'querystring';
 import React from 'react';
-import {Flex} from 'reflexbox';
-import {withStyles, Card} from '@material-ui/core';
+import {Flex, reflex} from 'reflexbox';
+import {Grid, withStyles, Card} from '@material-ui/core';
 import {compose, lifecycle} from 'recompose';
 
 import ProductHeader from './header';
 import StoresDetails from './stores-details';
 
+const ReflexGrid = reflex(Grid);
 
 const styles = theme => ({
   detailsCard: {
@@ -14,8 +15,13 @@ const styles = theme => ({
     margin: '16px 8px'
   },
   image: {
-    width: '400px',
-    margin: '16px'
+    [theme.breakpoints.up('lg')]: {
+      width: 'calc(100% - 32px)',
+      margin: '16px'
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '100%'
+    }
   },
   container: {
     padding: '48px 48px',
@@ -24,6 +30,14 @@ const styles = theme => ({
   detailsContainer: {
     margin: '8px 16px 16px 16px'
   },
+  storeDetailsContainer: {
+    [theme.breakpoints.up('lg')]: {
+      flexWrap: 'wrap'
+    },
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column'
+    }
+  }
 });
 
 export default compose(
@@ -42,14 +56,18 @@ export default compose(
       loadProduct(urlParams.url);
     }
   })
-)(({classes: {image, detailsCard, storesDetails}, product = {}, currency}) => (
+)(({classes: {image, detailsCard, storesDetails, storeDetailsContainer}, product = {}, currency}) => (
   <Card className={detailsCard}>
-    <Flex wrap>
-      <div>
+    <Grid container>
+      <Grid item lg='3' xs='12'>
         <img src={product.images && product.images[0]} className={image} />
-      </div>
-      <ProductHeader {...product} />
-      <StoresDetails className={storesDetails} {...product} currency={currency} />
-    </Flex>
+      </Grid>
+      <ReflexGrid item lg='9' xs='12' flex column>
+        <ProductHeader {...product} />
+        <Flex className={storeDetailsContainer} justify='center'>
+          <StoresDetails className={storesDetails} {...product} currency={currency} />
+        </Flex>
+      </ReflexGrid>
+    </Grid>
   </Card>
 ));

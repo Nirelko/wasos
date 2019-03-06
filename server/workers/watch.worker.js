@@ -3,9 +3,9 @@ import countiesMapping from 'i18n-iso-countries';
 import randomNumber from 'random-number-csprng';
 import moment, {duration} from 'moment';
 import {chain, map, flatten, value, orderBy, reduce} from 'lodash';
+import {convert} from '@nirelko/wasos-common';
 
 import CurrencyManager from '../managers/currency.manager';
-import {convert} from '../../common/utils';
 import AsosManager from '../managers/asos/asos.manager';
 import GmailManager from '../managers/gmail.manager';
 import User from '../api/user/user.model';

@@ -34,3 +34,5 @@ node_modules/
 .vscode/
 .idea/
 .env
+dist
+common/lib

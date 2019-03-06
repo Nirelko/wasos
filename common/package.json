@@ -1,0 +1,21 @@
+{
+  "name": "@nirelko/wasos-common",
+  "version": "1.0.2",
+  "description": "",
+  "main": "lib/utils.js",
+  "scripts": {
+    "build": "rimraf lib && babel src -d lib -s",
+    "publish-patch": "npm run build && npm version patch && npm publish"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}

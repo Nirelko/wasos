@@ -1,4 +1,3 @@
-import fs from 'fs';
 import {round} from 'lodash';
 
 export function findJsonInText (text, startIndex = 0) {
@@ -24,11 +23,6 @@ export function findJsonInText (text, startIndex = 0) {
   return text.substring(jsonStartIndex, currentIndex)
     .split('\\\'')
     .join('\'');
-}
-
-export function exportObjectToFile (name, object) {
-  console.log(object);
-  fs.writeFile(`./${name}`, JSON.stringify(object, null, '\t'));
 }
 
 export function extractPidFromUrl (url) {

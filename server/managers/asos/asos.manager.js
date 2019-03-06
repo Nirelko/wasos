@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {head, orderBy, map, flatten, chain, value} from 'lodash';
+import {findJsonInText} from '@nirelko/wasos-common';
 
 import ProductResource from '../../resoucres/product.resource';
-import {findJsonInText} from '../../../common/utils';
 import CurrencyManager from '../currency.manager';
 import StoreDetails from './store-details';
 

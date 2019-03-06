@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import {sortBy} from 'lodash';
+import {convert} from '@nirelko/wasos-common';
 
-import {convert} from '../../../../../../common/utils';
 import {loadProduct, loadExampleProduct} from './redux';
 import Product from './product';
 

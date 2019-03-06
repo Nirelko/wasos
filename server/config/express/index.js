@@ -17,6 +17,7 @@ export default () => {
 
   serverIntance.use(jwt({ secret: process.env.JWT_SECRET}).unless({path: /^((?!api\/user\/test).)*$/}));
 
+  serverIntance.use('/', express.static('client'))
   serverIntance.use('/api', api);
 
   serverIntance.use(urlProductExtractor());

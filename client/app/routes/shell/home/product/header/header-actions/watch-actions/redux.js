@@ -1,7 +1,13 @@
 import {createActions, handleActions} from 'redux-actions';
 import {resolve, reject} from 'redux-simple-promise';
 
-export const {addWatch, updateWatch, removeWatch, removeWatches} = createActions({
+export const {addWatch, updateWatch, removeWatch, removeWatches, getWatches} = createActions({
+  GET_WATCHES: ({username}) => ({
+    request: {
+      url: `/user/${username}/watch`,
+      method: 'get'
+    }
+  }),
   ADD_WATCH: ({username, ...watch}) => ({
     request: {
       url: `/user/${username}/watch`,
@@ -37,11 +43,20 @@ const FetchingState = state => ({
   isFetching: true
 });
 
+const unchangedResolvedState = ({isFetching, ...state}) => ({
+  ...state
+});
+
 const rejectedState = ({isFetching, ...state}) => ({
   ...state
 });
 
 export default handleActions({
+  [getWatches]: FetchingState,
+  [resolve(getWatches)]: (state, {payload: {data: all}}) => ({
+    all
+  }),
+  [reject(getWatches)]: rejectedState,
   [addWatch]: FetchingState,
   [resolve(addWatch)]: () => ({}),
   [reject(addWatch)]: rejectedState,

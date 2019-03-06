@@ -1,6 +1,6 @@
 import React from 'react';
 import {withStyles, Typography, Grid} from '@material-ui/core';
-import {compose, withStateHandlers} from 'recompose';
+import {compose, withStateHandlers, lifecycle} from 'recompose';
 import {Flex, reflex} from 'reflexbox';
 import {reduxForm} from 'redux-form';
 
@@ -24,6 +24,11 @@ const styles = theme => ({
 
 export default compose(
   withStyles(styles),
+  lifecycle({
+    componentDidMount() {
+
+    }
+  }),
   withStateHandlers({
     isMultiSelect: false
   }, {

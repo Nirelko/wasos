@@ -5,7 +5,7 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import webpack, {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack';
 
-const configWebpack = env => {
+const configWebpack = (env = {}) => {
   let webpackConfig = {
     entry: [
       './client/index.js'
@@ -86,7 +86,10 @@ const configWebpack = env => {
       ...webpackConfig.plugins,
       new HotModuleReplacementPlugin()
     ];
-  } else {
+
+    process.env.NODE_ENV = 'production';
+  }
+  else {
     webpackConfig = {
       ...webpackConfig,
       optimization: {

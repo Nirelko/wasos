@@ -4,7 +4,7 @@ import reduxLogger from 'redux-logger';
 import {reducer as form} from 'redux-form';
 import axios from 'axios';
 import simplePromiseMiddleware, {resolve, reject} from 'redux-simple-promise';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import {connectRouter, routerMiddleware} from 'connected-react-router';
 
 import history from './history';
@@ -32,6 +32,12 @@ axiosClient.interceptors.request.use(config => {
   return config;
 });
 
+const addEnvironmentMiddlewares = () => {
+  return process.env.NODE_ENV === 'development' ? [
+    reduxLogger
+  ] : [];
+};
+
 export default createStore(
   connectRouter(history)(
     combineReducers({
@@ -42,12 +48,12 @@ export default createStore(
       watches,
       form
     })),
-  composeWithDevTools(applyMiddleware(
+  composeWithDevTools(applyMiddleware(...[
     axiosMiddleware(axiosClient, {
       successSuffix: resolve(''),
       errorSuffix: reject('')
     }),
-    reduxLogger,
     simplePromiseMiddleware(),
-    routerMiddleware(history)
-  )));
+    routerMiddleware(history),
+    ...addEnvironmentMiddlewares()
+  ])));

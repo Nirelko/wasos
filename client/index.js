@@ -7,7 +7,7 @@ import 'roboto-fontface/css/roboto/sass/roboto-fontface-regular.scss';
 import 'roboto-fontface/css/roboto/sass/roboto-fontface-medium.scss';
 
 import App from './app';
-import './style.css';
+import './style.scss';
 
 
 const rootId = 'root';

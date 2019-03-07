@@ -6,3 +6,7 @@ html, body, #root {
   flex: 1;
   font-family: 'roboto';
 }
+* {
+  overflow-scrolling: touch;
+  -webkit-overflow-scrolling: touch;
+}

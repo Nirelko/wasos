@@ -6,7 +6,7 @@ import {compose} from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 
 const styles = theme => ({
-  contianer: {
+  container: {
     [theme.breakpoints.up('lg')]: {
       margin: '70px 25px 0'
     },
@@ -17,7 +17,7 @@ const styles = theme => ({
   countries: {
     marginTop: '24px'
   },
-  stockSizes: {
+  stockSizesText: {
     marginTop: '15px'
   },
   notAvailable: {
@@ -27,18 +27,18 @@ const styles = theme => ({
 
 export default compose(
   withStyles(styles)
-)(({classes, price, relatedCountries, countryCode, currency, originalCurrency, stockSizes = [], doesntExist}) => (
-  <Flex column align='center' className={classes.contianer}>
+)(({classes: {container, countries, notAvailable, stockSizesText}, price, relatedCountries, countryCode, currency, originalCurrency, stockSizes = [], doesntExist}) => (
+  <Flex column align='center' className={container}>
     <Flag code={countryCode} width='64' height='36' />
-    <span className={classes.countries}>{relatedCountries}</span>
+    <span className={countries}>{relatedCountries}</span>
     {
       doesntExist ? (
-        <span className={classes.notAvailable}>Not available at this country</span>
+        <span className={notAvailable}>Not available at this country</span>
       ) : (
         <Flex column align='center'>
           <span>{originalCurrency}</span>
           <span>{getSymbolFromCurrency(currency)}{price}</span>
-          <span className={classes.stockSizes}>Sizes In Stock:</span>
+          <span className={stockSizesText}>Sizes In Stock:</span>
           {
             stockSizes && stockSizes.length ?
               stockSizes.map(x => <span key={x}>{x}</span>) : (

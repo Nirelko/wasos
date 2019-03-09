@@ -11,7 +11,8 @@
     "seed": "node -r babel-register ./commands/seed.js",
     "build": "rimraf dist && npm run build-server && npm run build-client",
     "build-server": "babel server -d dist/server -s --copy-files",
-    "build-client": "webpack --env.production --env.NODE_ENV=producation"
+    "build-client": "webpack --env.production --env.NODE_ENV=producation",
+    "docker-build": "docker build --tag=wasos ."
   },
   "repository": {
     "type": "git",

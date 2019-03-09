@@ -2,12 +2,12 @@ import BasicResource from './basic.resource';
 
 class LocationResource extends BasicResource {
   constructor () {
-    super('http://api.ipstack.com/');
+    super('https://extreme-ip-lookup.com/json/');
   }
 
   getByIp (ip) {
   // eslint-disable-next-line camelcase
-    return this.client.get(`/${ip}`, {params: {access_key: process.env.LOCATION_API_KEY}})
+    return this.client.get(`/${ip}`)
       .then(({data}) => data);
   }
 }

@@ -36,3 +36,4 @@ node_modules/
 .env
 dist
 common/lib
+docker-compose.yml

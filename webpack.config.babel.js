@@ -62,7 +62,7 @@ const configWebpack = (env = {}) => {
     }
   };
 
-  if (!env.production) {
+  if (!env || !env.production) {
     const clientPort = 8080;
 
     webpackConfig = {
@@ -111,6 +111,7 @@ const configWebpack = (env = {}) => {
     }));
 
     process.env.NODE_ENV = 'production';
+
   }
 
   return webpackConfig;

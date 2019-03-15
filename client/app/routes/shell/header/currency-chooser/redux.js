@@ -17,9 +17,9 @@ export default handleActions({
     ...state,
     isFetching: true
   }),
-  [resolve(loadCurrencies)]: (state, {payload: {data: list}}) => ({
+  [resolve(loadCurrencies)]: (state, {payload: {data: {selected, currencies: list}}}) => ({
     list,
-    selected: state.selected || _.invert(list)[1]
+    selected
   }),
   [reject(loadCurrencies)]: state => ({
     ...state

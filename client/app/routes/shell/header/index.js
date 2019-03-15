@@ -15,14 +15,15 @@ const ToolBarStyle = theme => ({
     background: theme.palette.primary[500],
     color: 'rgba(255,255,255,.87)',
     height: '54px',
-    borderRadios: '0 !important'
+    borderRadios: '0 !important',
+    flexDirection: 'column'
   },
   titleContainer: {
     marginLeft: '2%'
   },
   appIcon: {
-    height: '64px',
-    width: '64px'
+    height: '54px',
+    width: '54px'
   }
 });
 

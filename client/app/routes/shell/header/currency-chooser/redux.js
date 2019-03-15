@@ -24,9 +24,9 @@ export default handleActions({
   [reject(loadCurrencies)]: state => ({
     ...state
   }),
-  [localLoadCurrencies]: (state, {payload: list}) => ({
+  [localLoadCurrencies]: (state, {payload: {currencies: list, selected}}) => ({
     list,
-    selected: state.selected || _.invert(list)[1]
+    selected
   }),
   [selectedCurrencyChanged]: (state, {payload: selected}) => ({
     ...state,

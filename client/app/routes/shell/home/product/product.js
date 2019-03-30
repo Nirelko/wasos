@@ -59,10 +59,10 @@ export default compose(
 )(({classes: {image, detailsCard, storesDetails, storeDetailsContainer}, product = {}, currency}) => (
   <Card className={detailsCard}>
     <Grid container>
-      <Grid item lg='3' xs='12'>
+      <Grid item lg={3} xs={12}>
         <img src={product.images && product.images[0]} className={image} />
       </Grid>
-      <ReflexGrid item lg='9' xs='12' flex column>
+      <ReflexGrid item lg={9} xs={12} flex column>
         <ProductHeader {...product} />
         <Flex className={storeDetailsContainer} justify='center'>
           <StoresDetails className={storesDetails} {...product} currency={currency} />

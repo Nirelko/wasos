@@ -66,7 +66,7 @@ class AsosManager {
   loadProductBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
-        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(\'') + 'view(\''.length));
+        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(') + 'view('.length));
         const {regionalStore: {keyStoreDataversion}} = JSON.parse(findJsonInText(data, data.lastIndexOf('siteChromeInitialStore = ')));
 
         if (productDetails.products) {

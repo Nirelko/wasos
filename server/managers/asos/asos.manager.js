@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {head, orderBy, map, flatten, chain, value} from 'lodash';
+import {head, orderBy, map, flatten, chain, value, min} from 'lodash';
 import {findJsonInText} from '@nirelko/wasos-common';
 
 import ProductResource from '../../resoucres/product.resource';
@@ -63,11 +63,19 @@ class AsosManager {
     } : {relatedCountries, countryCode, doesntExist}), x => x.price);
   }
 
+  findKeyStoreDataversion (text) {
+    const valueStartIndex = text.indexOf('keyStoreDataversion=') + 'keyStoreDataversion='.length;
+    const semicolonEndIndex = text.indexOf(';', valueStartIndex);
+    const commaEndIndex = text.indexOf('"', valueStartIndex);
+
+    return text.substring(valueStartIndex, min([semicolonEndIndex, commaEndIndex]));
+  }
+
   loadProductBasicDetails (url) {
     return axios.get(url)
       .then(({data}) => {
         let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(') + 'view('.length));
-        const {regionalStore: {keyStoreDataversion}} = JSON.parse(findJsonInText(data, data.lastIndexOf('siteChromeInitialStore = ')));
+        const keyStoreDataversion = this.findKeyStoreDataversion(data);
 
         if (productDetails.products) {
           [productDetails] = productDetails.products; // TODO: Add feature of choosing which product to show on multiple products option

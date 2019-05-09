@@ -5,6 +5,7 @@ import jwt from 'express-jwt';
 
 import api from '../../api';
 import WatchWorker from '../../workers/watch.worker';
+import FlightWorker from '../../workers/flight.worker';
 import urlProductExtractor from './middlewares/url-product-extractor';
 
 export default () => {
@@ -23,6 +24,7 @@ export default () => {
   serverIntance.use(urlProductExtractor());
 
   new WatchWorker().start();
+  new FlightWorker().start();
 
   serverIntance.listen(serverPort, () => console.log(`Server listening at port ${serverPort}`));
 }

@@ -2,6 +2,9 @@ import express from 'express';
 import {json, urlencoded} from 'body-parser';
 import helmet from 'helmet';
 import jwt from 'express-jwt';
+import compression from 'compression';
+import staticGzip from 'express-static-gzip';
+import {join} from 'path';
 
 import api from '../../api';
 import WatchWorker from '../../workers/watch.worker';
@@ -17,7 +20,12 @@ export default () => {
 
   serverIntance.use(jwt({ secret: process.env.JWT_SECRET}).unless({path: /^((?!api\/user\/test).)*$/}));
 
-  serverIntance.use('/', express.static('client'))
+  serverIntance.use(staticGzip(join(__dirname, '..', '..', 'client')));
+  serverIntance.use(compression());
+
+  // serverIntance.route('/*')
+  //   .get((req, res) => res.sendFile(join(__dirname, '..', '..', 'client', 'index.html')));
+  serverIntance.use('/', express.static('client'));
   serverIntance.use('/api', api);
 
   serverIntance.use(urlProductExtractor());

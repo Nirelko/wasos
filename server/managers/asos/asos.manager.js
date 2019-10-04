@@ -4,6 +4,7 @@ import {findJsonInText} from '@nirelko/wasos-common';
 
 import ProductResource from '../../resoucres/product.resource';
 import CurrencyManager from '../currency.manager';
+import CookieManager from '../cookies';
 import StoreDetails from './store-details';
 
 class AsosManager {
@@ -34,12 +35,12 @@ class AsosManager {
       {relatedCountries: store.relatedCountries, countryCode: store.countryCode, doesntExist: true};
   }
 
-  getDetailsByCurrencies (pid, store, keyStoreDataversion) {
-    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, keyStoreDataversion, currency})));
+  getDetailsByCurrencies (pid, store, keyStoreDataversion, cookie) {
+    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, keyStoreDataversion, currency}, cookie)));
   }
 
-  getDetailsByStore (pid, store, keyStoreDataversion) {
-    return this.getDetailsByCurrencies(pid, store, keyStoreDataversion, pid)
+  getDetailsByStore (pid, store, keyStoreDataversion, cookie) {
+    return this.getDetailsByCurrencies(pid, store, keyStoreDataversion, cookie)
       .then(productDetailsPrices => this.formatDetailsByAvailability(productDetailsPrices, store));
   }
 
@@ -48,9 +49,9 @@ class AsosManager {
       .then(x => x.map(y => y.toObject()));
   }
 
-  loadStoresDetails (id, keyStoreDataversion) {
+  loadStoresDetails (id, keyStoreDataversion, cookie) {
     return this.getAllStores()
-      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion))));
+      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion, cookie))));
   }
 
   calculateStoreDetails (sizes, stocskAndPrices) {
@@ -71,8 +72,12 @@ class AsosManager {
     return text.substring(valueStartIndex, min([semicolonEndIndex, commaEndIndex]));
   }
 
-  loadProductBasicDetails (url) {
-    return axios.get(url)
+  loadProductBasicDetails (url, cookie) {
+    return axios.get(url, {
+      headers: {
+        Cookie: cookie
+      }
+    })
       .then(({data}) => {
         let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(') + 'view('.length));
         const keyStoreDataversion = this.findKeyStoreDataversion(data);
@@ -96,18 +101,19 @@ class AsosManager {
   }
 
   getProductDetails (url) {
-    return this.loadProductBasicDetails(url)
-      .then(({id, name, images, sizeGuide, sizes, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion)
-        .then(stocksAndPrices => ({
-          id: id.toString(),
-          name,
-          images,
-          sizeGuide,
-          storesDetails: this.calculateStoreDetails(sizes, stocksAndPrices),
-          sizes,
-          url
-        })
-        ));
+    return CookieManager.getCookie(url)
+      .then(cookie => this.loadProductBasicDetails(url, cookie)
+        .then(({id, name, images, sizeGuide, sizes, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion, cookie)
+          .then(stocksAndPrices => ({
+            id: id.toString(),
+            name,
+            images,
+            sizeGuide,
+            storesDetails: this.calculateStoreDetails(sizes, stocksAndPrices),
+            sizes,
+            url
+          })
+          )));
   }
 }
 

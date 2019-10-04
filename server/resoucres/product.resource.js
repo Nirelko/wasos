@@ -5,14 +5,17 @@ class ProductResource extends BasicResource {
     super('http://asos.com/api/');
   }
 
-  getDetailsByStore (id, {store, currency, keyStoreDataversion, countryCode}) {
-    return this.client.get('product/catalogue/v2/stockprice', {
+  getDetailsByStore (id, {store, currency, keyStoreDataversion, countryCode}, cookie) {
+    return this.client.get('product/catalogue/v3/stockprice', {
       params: {
         productIds: id,
         store,
         currency,
         countryCode,
         keyStoreDataversion
+      },
+      headers: {
+        Cookie: cookie
       }
     })
       .then(({data}) => data);

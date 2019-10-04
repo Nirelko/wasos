@@ -1,5 +1,20 @@
 FROM node:12.10-alpine
 
+# Install Chrome
+RUN apk add --no-cache \
+      chromium \
+      nss \
+      freetype \
+      freetype-dev \
+      harfbuzz \
+      ca-certificates \
+      ttf-freefont \
+      nodejs \
+      yarn
+
+# Tell Puppeteer to skip installing Chrome. We'll be using the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+
 # Install all the dependencies for build
 WORKDIR /usr/src/app
 COPY package*.json ./

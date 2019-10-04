@@ -2,9 +2,13 @@ import puppeteer from 'puppeteer';
 
 class CookiesManger {
   init () {
-    return puppeteer.launch().then(browser => {
-      this.browser = browser;
-    });
+    return puppeteer.launch({
+      executablePath: '/usr/bin/chromium-browser',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+    })
+      .then(browser => {
+        this.browser = browser;
+      });
   }
 
   getCookie (address) {

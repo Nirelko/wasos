@@ -75,7 +75,7 @@ class AsosManager {
   loadProductBasicDetails (url, cookie) {
     return axios.get(url, {
       headers: {
-        Cookie: cookie
+        cookie
       }
     })
       .then(({data}) => {

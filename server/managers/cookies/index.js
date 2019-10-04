@@ -1,21 +1,26 @@
 import puppeteer from 'puppeteer';
 
 class CookiesManger {
-  async init () {
-    this.browser = await puppeteer.launch();
+  init () {
+    return puppeteer.launch().then(browser => {
+      this.browser = browser;
+    });
   }
 
-  async getCookie (address) {
-    const context = await this.browser.createIncognitoBrowserContext();
-    const page = await context.newPage();
+  getCookie (address) {
+    return this.browser.createIncognitoBrowserContext()
+      .then(context => context.newPage()
+        .then(page => page.goto(address)
+          .then(() => page.cookies()))
+        .then(cookies => {
+          return Promise.all([context.close(),
+            Promise.resolve(this.calculateCookie(cookies))]);
+        })
+        .then(([close, cookie]) => cookie));
+  }
 
-    await page.goto(address);
-    const resultCoockie = (await page.cookies()).map(({name, value}) => `${name} = ${value}`).join(';');
-
-    await page.close();
-    await context.close();
-
-    return resultCoockie;
+  calculateCookie (cookies) {
+    return `browseCountry=${cookies.find(x => x.name === 'geocountry').value};browseCurrency=GBP;storeCode=ROW;${cookies.map(({name, value}) => `${name} = ${value}`).join(';')}`;
   }
 }
 

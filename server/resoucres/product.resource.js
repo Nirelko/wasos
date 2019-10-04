@@ -15,7 +15,7 @@ class ProductResource extends BasicResource {
         keyStoreDataversion
       },
       headers: {
-        Cookie: cookie
+        cookie
       }
     })
       .then(({data}) => data);

@@ -1,4 +1,4 @@
-FROM node:10.15-alpine
+FROM node:12.10-alpine
 
 # Install all the dependencies for build
 WORKDIR /usr/src/app

@@ -79,7 +79,7 @@ class AsosManager {
       }
     })
       .then(({data}) => {
-        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('view(') + 'view('.length));
+        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('window.asos.pdp.config.product =') + 'window.asos.pdp.config.product ='.length));
         const keyStoreDataversion = this.findKeyStoreDataversion(data);
 
         if (productDetails.products) {

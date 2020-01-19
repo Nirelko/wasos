@@ -1,6 +1,7 @@
 import axios from 'axios';
-import {head, orderBy, map, flatten, chain, value, min} from 'lodash';
+import {chain, flatten, head, map, min, orderBy} from 'lodash';
 import {findJsonInText} from '@nirelko/wasos-common';
+import currencyToCountryCodeMap from 'currency-code-map';
 
 import ProductResource from '../../resoucres/product.resource';
 import CurrencyManager from '../currency.manager';
@@ -10,6 +11,23 @@ import StoreDetails from './store-details';
 class AsosManager {
   constructor () {
     this.productResource = new ProductResource();
+    this.countryCodeToSizeScheme = {
+      us: {
+        countryCode: 'us',
+        browseCountry: 'US',
+        browseCurrency: 'USD'
+      },
+      uk: {
+        countryCode: 'uk',
+        browseCountry: 'GB',
+        browseCurrency: 'GBP'
+      },
+      eu: {
+        countryCode: 'il',
+        browseCountry: 'IL',
+        browseCurrency: 'ILS'
+      }
+    };
   }
 
   formatDetailsByStore ({productPrice: {currency, current: {value: price}}, variants}, {relatedCountries, countryCode}) {
@@ -36,7 +54,11 @@ class AsosManager {
   }
 
   getDetailsByCurrencies (pid, store, keyStoreDataversion, cookie) {
-    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {...store, keyStoreDataversion, currency}, cookie)));
+    return Promise.all(store.currencies.map(currency => this.productResource.getDetailsByStore(pid, {
+      ...store,
+      keyStoreDataversion,
+      currency
+    }, cookie)));
   }
 
   getDetailsByStore (pid, store, keyStoreDataversion, cookie) {
@@ -54,14 +76,75 @@ class AsosManager {
       .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion, cookie))));
   }
 
-  calculateStoreDetails (sizes, stocskAndPrices) {
+  calculateStoreDetails (stocskAndPrices) {
     return orderBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
       price,
       currency,
       relatedCountries,
       countryCode,
-      stockSizes: sizes.filter((size, index) => sizesStock[index]).map(x => x.name)
+      sizesStock
     } : {relatedCountries, countryCode, doesntExist}), x => x.price);
+  }
+
+  generateUrlByCountryCode ({countryCode, ...urlParams}, oldUrl) {
+    const urlParts = oldUrl.split('/');
+    const urlCountryCode = urlParts[3];
+
+    if (Object.keys(currencyToCountryCodeMap).includes(urlCountryCode.toUpperCase())) {
+      if (countryCode === 'uk') {
+        urlParts.splice(3, 1);
+      }
+      else {
+        urlParts[3] = countryCode;
+      }
+    }
+    else if (countryCode !== 'uk') {
+      urlParts.splice(3, 0, countryCode);
+    }
+
+    return this.buildCountryUrlWithParams(urlParts, urlParams);
+  }
+
+  buildCountryUrlWithParams (urlParts, urlParams) {
+    let resultUrl = urlParts.join('/');
+
+    resultUrl = `${resultUrl}${resultUrl.indexOf('?') === -1 ? '?' : '&'}`;
+
+    return `${resultUrl}${map(urlParams, (value, key) => `${key}=${value}`).join('&')}`;
+  }
+
+  loadAllSizeSchemes (basicProductDetails, url, cookie) {
+    const productSize = head(basicProductDetails.sizes);
+
+    if (!Object.keys(this.countryCodeToSizeScheme).some(x => productSize.toLowerCase().includes(x))) {
+      return {
+        ...basicProductDetails,
+        sizeSchemeToSizesNames: this.createUniversalScheme(basicProductDetails.sizes)
+      };
+    }
+
+    return Promise.all(Object.keys(this.countryCodeToSizeScheme)
+      .map(countryCode => (productSize.toLowerCase().includes(countryCode) ?
+        Promise.resolve({[countryCode]: basicProductDetails.sizes}) :
+        this.loadProductBasicDetails(this.generateUrlByCountryCode(this.countryCodeToSizeScheme[countryCode], url), cookie)
+          .then(({sizes} = {}) => !sizes ? {} : ({[countryCode]: sizes})))))
+      .then(sizeSchemesToSizesNames => {
+        return ({
+          ...basicProductDetails,
+          sizeSchemeToSizesNames: Object.assign(...sizeSchemesToSizesNames)
+        });
+      });
+  }
+
+  createUniversalScheme (sizes) {
+    const resultSchemeDictionary = {universal: true};
+
+    Object.keys(this.countryCodeToSizeScheme)
+      .forEach(x => {
+        resultSchemeDictionary[x] = sizes;
+      });
+
+    return resultSchemeDictionary;
   }
 
   findKeyStoreDataversion (text) {
@@ -79,7 +162,17 @@ class AsosManager {
       }
     })
       .then(({data}) => {
-        let productDetails = JSON.parse(findJsonInText(data, data.lastIndexOf('window.asos.pdp.config.product =') + 'window.asos.pdp.config.product ='.length));
+        if (!data) {
+          return;
+        }
+
+        const startIndexOfDetails = data.lastIndexOf('window.asos.pdp.config.product =');
+
+        if (startIndexOfDetails === -1) {
+          return;
+        }
+
+        let productDetails = JSON.parse(findJsonInText(data, startIndexOfDetails + 'window.asos.pdp.config.product ='.length));
         const keyStoreDataversion = this.findKeyStoreDataversion(data);
 
         if (productDetails.products) {
@@ -93,7 +186,7 @@ class AsosManager {
           id,
           name,
           sizeGuide,
-          sizes: variants.map(({size: name, variantId: id}) => ({id, name})),
+          sizes: variants.map(({size: name}) => name),
           images: images.map(x => x.url),
           keyStoreDataversion
         };
@@ -103,14 +196,15 @@ class AsosManager {
   getProductDetails (url) {
     return CookieManager.getCookie(url)
       .then(cookie => this.loadProductBasicDetails(url, cookie)
-        .then(({id, name, images, sizeGuide, sizes, keyStoreDataversion}) => this.loadStoresDetails(id, keyStoreDataversion, cookie)
+        .then(basicProductDetails => this.loadAllSizeSchemes(basicProductDetails, url, cookie))
+        .then(({id, name, images, sizeGuide, keyStoreDataversion, sizeSchemeToSizesNames}) => this.loadStoresDetails(id, keyStoreDataversion, cookie)
           .then(stocksAndPrices => ({
             id: id.toString(),
             name,
             images,
             sizeGuide,
-            storesDetails: this.calculateStoreDetails(sizes, stocksAndPrices),
-            sizes,
+            storesDetails: this.calculateStoreDetails(stocksAndPrices),
+            sizeSchemeToSizesNames,
             url
           })
           )));

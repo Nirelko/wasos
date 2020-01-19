@@ -27,7 +27,7 @@ const styles = theme => ({
 
 export default compose(
   withStyles(styles)
-)(({classes, price, relatedCountries, countryCode, currency, originalCurrency, stockSizes = [], doesntExist}) => (
+)(({classes, price, relatedCountries, countryCode, currency, originalCurrency, sizesStock = [], sizeScheme, sizeSchemeToSizesNames, doesntExist}) => (
   <Flex column align='center' className={classes.contianer}>
     <Flag code={countryCode} width='64' height='36' />
     <span className={classes.countries}>{relatedCountries}</span>
@@ -40,8 +40,8 @@ export default compose(
           <span>{getSymbolFromCurrency(currency)}{price}</span>
           <span className={classes.stockSizes}>Sizes In Stock:</span>
           {
-            stockSizes && stockSizes.length ?
-              stockSizes.map(x => <span key={x}>{x}</span>) : (
+            sizesStock && sizesStock.some(x => x) ?
+              sizesStock.map((x, index) => x ? <span key={sizeSchemeToSizesNames[sizeScheme][index]}>{sizeSchemeToSizesNames[sizeScheme][index]}</span> : null) : (
                 <span>Out of stock</span>
               )
           }

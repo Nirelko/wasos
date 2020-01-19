@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import tokenManager from '../../../../../common/token-manager';
+import tokenManager from '../../../../../../../common/token-manager';
 import {loadCurrencies, localLoadCurrencies, selectedCurrencyChanged} from './redux';
 import CurrencyChooser from './currency-chooser';
 

@@ -4,6 +4,7 @@ import {Flex, reflex} from 'reflexbox';
 import {Grid, withStyles, Card} from '@material-ui/core';
 import {compose, lifecycle} from 'recompose';
 
+import _ from 'lodash';
 import ProductHeader from './header';
 import StoresDetails from './stores-details';
 
@@ -56,16 +57,19 @@ export default compose(
       loadProduct(urlParams.url);
     }
   })
-)(({classes: {image, detailsCard, storesDetails, storeDetailsContainer}, product = {}, currency}) => (
+)(({classes: {image, detailsCard, storesDetails, storeDetailsContainer}, product = {sizeSchemeToSizesNames: {}}, sizeScheme, currency}) => (
   <Card className={detailsCard}>
     <Grid container>
       <Grid item lg={3} xs={12}>
         <img src={product.images && product.images[0]} className={image} />
       </Grid>
       <ReflexGrid item lg={9} xs={12} flex column>
-        <ProductHeader {...product} />
+        <ProductHeader {...product} universalScheme={product.sizeSchemeToSizesNames && product.sizeSchemeToSizesNames.universal} />
         <Flex className={storeDetailsContainer} justify='center'>
-          <StoresDetails className={storesDetails} {...product} currency={currency} />
+          <StoresDetails
+            className={storesDetails} {...product} currency={currency}
+            sizeScheme={Object.keys(product.sizeSchemeToSizesNames).includes(sizeScheme) ? sizeScheme : _.head(Object.keys(product.sizeSchemeToSizesNames)) || ''}
+          />
         </Flex>
       </ReflexGrid>
     </Grid>

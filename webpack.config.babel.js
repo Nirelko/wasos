@@ -3,7 +3,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
-import webpack, {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack';
+import {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack';
 
 const configWebpack = (env = {}) => {
   let webpackConfig = {
@@ -68,7 +68,7 @@ const configWebpack = (env = {}) => {
     webpackConfig = {
       ...webpackConfig,
       mode: 'development',
-      devtool: 'eval-source-map',
+      devtool: 'cheap-module-eval-source-map',
       devServer: {
         hot: true,
         inline: true,

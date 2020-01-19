@@ -7,13 +7,14 @@ import simplePromiseMiddleware, {resolve, reject} from 'redux-simple-promise';
 import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import {connectRouter, routerMiddleware} from 'connected-react-router';
 
+import tokenManager from '../common/token-manager';
 import history from './history';
 import productSearch from './routes/shell/home/product/redux';
-import currencies from './routes/shell/header/currency-chooser/redux';
+import currencies from './routes/shell/home/product/header/currency-chooser/redux';
+import sizeScheme from './routes/shell/home/product/header/size-scheme-chooser/redux';
 import auth from './routes/exterior/login/redux';
 import register from './routes/exterior/register/redux';
 import watches from './routes/shell/home/product/header/header-actions/watch-actions/redux';
-import tokenManager from '../common/token-manager';
 
 
 const axiosClient = axios.create({
@@ -43,6 +44,7 @@ export default createStore(
     combineReducers({
       productSearch,
       currencies,
+      sizeScheme,
       auth,
       register,
       watches,

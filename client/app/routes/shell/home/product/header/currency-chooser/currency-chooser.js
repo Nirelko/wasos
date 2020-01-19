@@ -4,7 +4,7 @@ import {compose, lifecycle} from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
 import _ from 'lodash';
 
-import tokenManager from '../../../../../common/token-manager';
+import tokenManager from '../../../../../../../common/token-manager';
 
 export default compose(
   lifecycle({
@@ -15,8 +15,9 @@ export default compose(
       currencies ? localLoadCurrencies(currencies) : loadCurrencies();
     }
   })
-)(({currencies, selected = '', onCurrencyChange}) => (
+)(({className, currencies, selected = '', onCurrencyChange}) => (
   <Select
+    className={className}
     name='name'
     value={selected}
     displayEmpty

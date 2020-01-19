@@ -15,9 +15,10 @@ const calculatePricesByCurrency = (product, currencies, selectedCurrency) => ({
 });
 
 export default connect(
-  ({productSearch: {data: product, isFetching}, currencies: {list, selected: currency}}) => ({
+  ({productSearch: {data: product, isFetching}, currencies: {list, selected: currency}, sizeScheme}) => ({
     product: product && list && calculatePricesByCurrency(product, list, currency),
     currency,
+    sizeScheme,
     isFetching
   }), dispatch => ({
     initExampleProduct () {

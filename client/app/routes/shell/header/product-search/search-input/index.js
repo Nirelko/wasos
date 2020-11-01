@@ -5,7 +5,7 @@ import {Magnify} from 'mdi-material-ui';
 import {TextField} from 'redux-form-material-ui';
 import {Field} from 'redux-form';
 import {compose} from 'recompose';
-import _ from 'lodash';
+import {noop} from 'lodash';
 
 const styles = theme => ({
   inputContainer: {
@@ -35,7 +35,7 @@ const ReflexField = reflex(Field);
 
 export default compose(
   withStyles(styles)
-)(({classes: {input, buttonWrapper, iconButton, root, icon}, text, onClick = _.noop, disabled}) => (
+)(({classes: {input, buttonWrapper, iconButton, root, icon}, text, onClick = noop, disabled}) => (
   <ReflexPaper flex auto align='center'>
     <ReflexField
       name='url'

@@ -4,6 +4,7 @@ import UglifyJsPlugin from 'uglifyjs-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import OptimizeCSSAssetsPlugin from 'optimize-css-assets-webpack-plugin';
 import {HotModuleReplacementPlugin, NamedModulesPlugin} from 'webpack';
+import {BundleAnalyzerPlugin} from 'webpack-bundle-analyzer';
 
 const configWebpack = (env = {}) => {
   let webpackConfig = {
@@ -19,7 +20,9 @@ const configWebpack = (env = {}) => {
       rules: [
         {
           test: /\.js?/,
-          use: 'babel-loader',
+          use: {
+            loader: 'babel-loader'
+          },
           exclude: /node_modules/
         },
         {
@@ -53,6 +56,7 @@ const configWebpack = (env = {}) => {
         inject: 'body'
       }),
       new NamedModulesPlugin()
+      // new LodashModuleReplacementPlugin()
     ],
     resolve: {
       extensions: ['.js', '.less', '.css', '.html']
@@ -68,7 +72,7 @@ const configWebpack = (env = {}) => {
     webpackConfig = {
       ...webpackConfig,
       mode: 'development',
-      devtool: 'cheap-module-eval-source-map',
+      devtool: 'eval-source-map',
       devServer: {
         hot: true,
         inline: true,
@@ -80,6 +84,10 @@ const configWebpack = (env = {}) => {
           }
         }
       }
+    };
+
+    webpackConfig.resolve.alias = {
+      'react-dom': '@hot-loader/react-dom'
     };
 
     webpackConfig.plugins = [
@@ -111,7 +119,14 @@ const configWebpack = (env = {}) => {
     }));
 
     process.env.NODE_ENV = 'production';
+  }
 
+  if (env.analyize) {
+    webpackConfig.plugins.push(new BundleAnalyzerPlugin({
+      openAnalyzer: true,
+      generateStatsFile: true,
+      analyzerMode: 'static'
+    }));
   }
 
   return webpackConfig;

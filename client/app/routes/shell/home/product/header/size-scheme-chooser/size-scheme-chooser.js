@@ -1,7 +1,7 @@
 import React from 'react';
 import {MenuItem, Select} from '@material-ui/core';
 import {compose, lifecycle} from 'recompose';
-import _ from 'lodash';
+import {head, map} from 'lodash';
 
 export default compose(
   lifecycle({
@@ -17,13 +17,13 @@ export default compose(
 )(({sizeScheme, availableSizeSchemes = {}, sizeSchemeChanged}) => (
   <Select
     name='sizeSchemeChooser'
-    value={Object.values(availableSizeSchemes).includes(sizeScheme) ? sizeScheme : _.head(Object.values(availableSizeSchemes)) || ''}
+    value={Object.values(availableSizeSchemes).includes(sizeScheme) ? sizeScheme : head(Object.values(availableSizeSchemes)) || ''}
     displayEmpty
     onChange={sizeSchemeChanged}
   >
     {
       availableSizeSchemes ?
-        _.map(availableSizeSchemes, (sizeSchemeOption, sizeSchemeType) => (
+        map(availableSizeSchemes, (sizeSchemeOption, sizeSchemeType) => (
           <MenuItem key={sizeSchemeType} value={sizeSchemeOption}>{sizeSchemeType}</MenuItem>)) :
         <MenuItem values='' />
     }

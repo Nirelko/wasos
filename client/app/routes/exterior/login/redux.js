@@ -1,7 +1,7 @@
 import {createActions, handleActions} from 'redux-actions';
 import {resolve, reject} from 'redux-simple-promise';
 import {NOT_FOUND} from 'http-status-codes';
-import _ from 'lodash';
+import {noop} from 'lodash';
 
 import {addWatch, updateWatch, removeWatch, removeWatches} from '../../shell/home/product/header/header-actions/watch-actions/redux';
 
@@ -14,7 +14,7 @@ export const {login, localLogin, localLogout} = createActions({
     }
   }),
   LOCAL_LOGIN: loginData => loginData,
-  LOCAL_LOGOUT: _.noop
+  LOCAL_LOGOUT: noop
 });
 
 const watchChangeHandler = (state, {payload: {data: user}}) => ({

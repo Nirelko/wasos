@@ -11,7 +11,7 @@ const calculatePricesByCurrency = (product, currencies, selectedCurrency) => ({
     ...x,
     originalCurrency,
     price: convert(x.price, currencies[originalCurrency], currencies[selectedCurrency])
-  })), x => x.price)
+  })), [x => x.price])
 });
 
 export default connect(

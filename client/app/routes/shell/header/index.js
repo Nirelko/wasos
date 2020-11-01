@@ -4,7 +4,6 @@ import {Flex, reflex} from 'reflexbox';
 import {compose} from 'recompose';
 import {Link} from 'react-router-dom';
 
-import appIconSrc from '../../../../assests/app-icon.png';
 import ProductSearch from './product-search';
 import UserActions from './user-actions';
 
@@ -28,6 +27,7 @@ const ToolBarStyle = theme => ({
 });
 
 const FlexSearch = reflex(ProductSearch);
+const logoUrl = 'http://up419.siz.co.il/up2/hjmdxnneqdz1.png';
 
 export default compose(
   withStyles(ToolBarStyle)
@@ -36,7 +36,7 @@ export default compose(
     <Flex align='center'>
       <Flex className={titleContainer} align='center' justify='center'>
         <Link to='/'>
-          <img src={appIconSrc} className={appIcon} />
+          <img src={logoUrl} className={appIcon} />
         </Link>
       </Flex>
       <FlexSearch flex auto />

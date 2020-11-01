@@ -21,7 +21,12 @@ export default connect(
     localLoadCurrencies (currencies) {
       return dispatch(localLoadCurrencies(currencies));
     },
-    onCurrencyChange ({target: {value}}) {
-      return dispatch(selectedCurrencyChanged(value));
+    loadCurrency (currency) {
+      return dispatch(selectedCurrencyChanged(currency));
+    },
+    onCurrencyChange ({target: {value: newCurrency}}) {
+      localStorage.setItem('currency', newCurrency);
+
+      return dispatch(selectedCurrencyChanged(newCurrency));
     }
   }))(CurrencyChooser);

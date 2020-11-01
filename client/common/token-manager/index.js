@@ -1,12 +1,10 @@
-import moment from 'moment';
-
-const TOKEN_LIFE_SPAN = moment.duration(5, 'days').asMilliseconds();
+const TOKEN_LIFE_SPAN = 5 * 24 * 60 * 60 * 1000;
 
 class TokenManager {
   add (name, data) {
     localStorage.setItem(name, JSON.stringify({
       data,
-      creationDate: moment.now()
+      creationDate: Date.now()
     }));
   }
 
@@ -18,7 +16,7 @@ class TokenManager {
     }
     item = JSON.parse(item);
 
-    if (moment.now() - item.creationDate > TOKEN_LIFE_SPAN) {
+    if (Date.now() - item.creationDate > TOKEN_LIFE_SPAN) {
       this.remove(name);
 
       return;

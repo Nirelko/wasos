@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import _ from 'lodash';
+import {map, head, orderBy} from 'lodash';
 import {convert} from '@nirelko/wasos-common';
 
 import {addWatch} from '../../redux';
@@ -13,11 +13,8 @@ export default connect(
     product,
     username,
     selectedCurrency,
-    minimumPrice: _(storesDetails)
-      .map(({currency: originalCurrency, price}) => convert(price, currencies[originalCurrency], currencies[selectedCurrency]))
-      .filter(x => !Number.isNaN(x))
-      .orderBy()
-      .first()
+    minimumPrice: head(orderBy(map(storesDetails, ({currency: originalCurrency, price}) => convert(price, currencies[originalCurrency], currencies[selectedCurrency]))
+      .filter(x => !Number.isNaN(x))))
   }), dispatch => ({
     dispatchAddWatch: newWatch => dispatch(addWatch(newWatch))
       .then(({payload: {data: user}}) => tokenManager.replaceData('auth', {

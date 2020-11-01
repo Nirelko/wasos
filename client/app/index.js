@@ -8,12 +8,14 @@ import store from './store.redux';
 import history from './history';
 import Routes from './routes';
 
-export default () => (
-  <MuiThemeProvider theme={theme}>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <Routes />
-      </ConnectedRouter>
-    </Provider>
-  </MuiThemeProvider>
-);
+export default function App () {
+  return (
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Routes />
+        </ConnectedRouter>
+      </Provider>
+    </MuiThemeProvider>
+  );
+}

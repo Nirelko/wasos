@@ -1,6 +1,5 @@
 import React from 'react';
 import {Flex} from 'reflexbox';
-import Flag from 'react-world-flags';
 import {withStyles} from '@material-ui/core';
 import {compose} from 'recompose';
 import getSymbolFromCurrency from 'currency-symbol-map';
@@ -22,6 +21,10 @@ const styles = theme => ({
   },
   notAvailable: {
     marginTop: '15px'
+  },
+  flag: {
+    width: '64px',
+    height: '36px'
   }
 });
 
@@ -29,7 +32,7 @@ export default compose(
   withStyles(styles)
 )(({classes, price, relatedCountries, countryCode, currency, originalCurrency, sizesStock = [], sizeScheme, sizeSchemeToSizesNames, doesntExist}) => (
   <Flex column align='center' className={classes.contianer}>
-    <Flag code={countryCode} width='64' height='36' />
+    <img className={classes.flag} src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/1x1/${countryCode.toLowerCase()}.svg`} />
     <span className={classes.countries}>{relatedCountries}</span>
     {
       doesntExist ? (

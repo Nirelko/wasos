@@ -4,7 +4,7 @@ import {Flex, reflex} from 'reflexbox';
 import {Grid, withStyles, Card} from '@material-ui/core';
 import {compose, lifecycle} from 'recompose';
 
-import _ from 'lodash';
+import {head} from 'lodash';
 import ProductHeader from './header';
 import StoresDetails from './stores-details';
 
@@ -68,7 +68,7 @@ export default compose(
         <Flex className={storeDetailsContainer} justify='center'>
           <StoresDetails
             className={storesDetails} {...product} currency={currency}
-            sizeScheme={Object.keys(product.sizeSchemeToSizesNames).includes(sizeScheme) ? sizeScheme : _.head(Object.keys(product.sizeSchemeToSizesNames)) || ''}
+            sizeScheme={Object.keys(product.sizeSchemeToSizesNames).includes(sizeScheme) ? sizeScheme : head(Object.keys(product.sizeSchemeToSizesNames)) || ''}
           />
         </Flex>
       </ReflexGrid>

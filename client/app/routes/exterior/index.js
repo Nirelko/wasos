@@ -4,7 +4,6 @@ import {Flex, reflex} from 'reflexbox';
 import {compose} from 'recompose';
 
 import Routes from './routes';
-import appIconSrc from '../../../assests/app-icon.png';
 
 const style = theme => ({
   background: {
@@ -47,6 +46,8 @@ const style = theme => ({
 
 const FlexCard = reflex(Card);
 
+const logoUrl = 'http://up419.siz.co.il/up2/hjmdxnneqdz1.png';
+
 export default compose(
   withStyles(style)
 )(({classes: {background, backgroundPrimary, card, iconContainer, appIcon, cardForm}}) => (
@@ -54,7 +55,7 @@ export default compose(
     <div className={backgroundPrimary}/>
     <FlexCard flex column className={card}>
       <Card className={iconContainer}>
-        <img src={appIconSrc} className={appIcon}/>
+        <img src={logoUrl} className={appIcon}/>
       </Card>
       <form className={cardForm}>
         <Routes />

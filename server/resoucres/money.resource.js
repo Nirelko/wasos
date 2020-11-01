@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {map} from 'lodash';
 
 import BasicResource from './basic.resource';
 
@@ -16,7 +16,7 @@ class MoneyResource extends BasicResource {
         access_key: process.env.CURRENCY_API_KEY
       }
     })
-      .then(({data: {quotes: rates}}) => Object.assign(..._.map(rates, (value, currencyName) => ({[removeBaseCurrencyName(currencyName, baseCurrency)]: value}))));
+      .then(({data: {quotes: rates}}) => Object.assign(...map(rates, (value, currencyName) => ({[removeBaseCurrencyName(currencyName, baseCurrency)]: value}))));
   }
 }
 

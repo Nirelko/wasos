@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import {reduce} from 'lodash';
 import {load} from 'dotenv-extended';
 
 import startMongo from '../server/config/db';
@@ -9,7 +9,7 @@ import seeds from '../server/config/db/seed';
 load();
 
 startMongo()
-  .then(() => _.reduce(seeds, (oldSeederPromise, {run, collectionName}) => {
+  .then(() => reduce(seeds, (oldSeederPromise, {run, collectionName}) => {
     console.log(`Now seeding ${collectionName}`);
 
     return oldSeederPromise

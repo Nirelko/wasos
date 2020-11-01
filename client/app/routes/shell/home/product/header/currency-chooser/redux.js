@@ -1,6 +1,5 @@
 import {createActions, handleActions} from 'redux-actions';
 import {resolve, reject} from 'redux-simple-promise';
-import _ from 'lodash';
 
 export const {loadCurrencies, localLoadCurrencies, selectedCurrencyChanged} = createActions({
   LOAD_CURRENCIES: () => ({

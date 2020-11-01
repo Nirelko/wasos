@@ -2,7 +2,7 @@ import getSymbolFromCurrency from 'currency-symbol-map';
 import countiesMapping from 'i18n-iso-countries';
 import randomNumber from 'random-number-csprng';
 import moment, {duration} from 'moment';
-import {chain, map, flatten, value, orderBy, reduce} from 'lodash';
+import {map, flatten, sortBy, reduce, groupBy} from 'lodash';
 import {convert} from '@nirelko/wasos-common';
 
 import CurrencyManager from '../managers/currency.manager';
@@ -19,11 +19,8 @@ class WatchWorker {
 
   getWatchesGroupedByProduct () {
     return User.find({}).select({email: 1, watches: 1})
-      .then(users => chain(users).map(x => x.toObject())
-        .map(({email, watches}) => watches.map(watch => ({...watch, email})))
-        .flatten()
-        .groupBy(x => x.product.id)
-        .value());
+      .then(users => groupBy(flatten(users.map(x => x.toObject())
+        .map(({email, watches}) => watches.map(watch => ({...watch, email})))), x => x.product.id));
   }
 
   getFulfilledWatchesMailData (productWatches, storesDetails, currencies) {
@@ -70,11 +67,11 @@ class WatchWorker {
   sampleProductWatches (productWatches, currencies) {
     return this.asosManager.getProductDetails(productWatches[0].product.url)
       .then(productStoreDetails => {
-        const storesDetails = orderBy(productStoreDetails.storesDetails.map(stocksAndPrice => ({
+        const storesDetails = sortBy(productStoreDetails.storesDetails.map(stocksAndPrice => ({
           ...stocksAndPrice,
           stockSizesIds: stocksAndPrice.stockSizes.map(x => productStoreDetails.sizes.find(y => y.name === x).id),
           convertedPrice: convert(stocksAndPrice.price, currencies[stocksAndPrice.currency], currencies.USD)
-        })), x => x.convertedPrice);
+        })), [x => x.convertedPrice]);
 
         const fulfilledWatchesMailData = this.getFulfilledWatchesMailData(productWatches, storesDetails, currencies);
 

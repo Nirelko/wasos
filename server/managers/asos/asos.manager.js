@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {chain, flatten, head, map, min, orderBy} from 'lodash';
+import {flatten, head, map, min, sortBy, orderBy} from 'lodash';
 import {findJsonInText} from '@nirelko/wasos-common';
 import currencyToCountryCodeMap from 'currency-code-map';
 
@@ -41,10 +41,7 @@ class AsosManager {
   }
 
   findCheapestProduct (productDetailsPrices) {
-    return chain(productDetailsPrices)
-      .orderBy(({productPrice: {currency, current: {value}}}) => CurrencyManager.convert(value, currency, 'USD'))
-      .head()
-      .value();
+    return head(orderBy(productDetailsPrices, ({productPrice: {currency, current: {value}}}) => CurrencyManager.convert(value, currency, 'USD')));
   }
 
   formatDetailsByAvailability (productDetailsPrices, store) {
@@ -77,13 +74,13 @@ class AsosManager {
   }
 
   calculateStoreDetails (stocskAndPrices) {
-    return orderBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
+    return sortBy(stocskAndPrices.map(({price, currency, sizesStock, relatedCountries, countryCode, doesntExist}) => !doesntExist ? {
       price,
       currency,
       relatedCountries,
       countryCode,
       sizesStock
-    } : {relatedCountries, countryCode, doesntExist}), x => x.price);
+    } : {relatedCountries, countryCode, doesntExist}), [x => x.price]);
   }
 
   generateUrlByCountryCode ({countryCode, ...urlParams}, oldUrl) {

@@ -14,7 +14,8 @@
     "build-client": "webpack --env.production --env.NODE_ENV=producation",
     "docker-build": "docker build --tag=wasos .",
     "dist": "node dist/server/index.js",
-    "analyize": "webpack --env.production --env.NODE_ENV=producation --env.analyize"
+    "analyize": "webpack --env.production --env.NODE_ENV=producation --env.analyize",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

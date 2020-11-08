@@ -153,6 +153,7 @@ class AsosManager {
   }
 
   loadProductBasicDetails (url, cookie) {
+    console.log('cookies', cookie);
     return axios.get(url, {
       headers: {
         cookie

@@ -8,7 +8,7 @@ import urlProductExtractor from './middlewares/url-product-extractor';
 
 export default () => {
   const serverIntance = express();
-  const serverPort = process.env.ENV === 'production' ? 80 : 8000;
+  const serverPort = process.env.ENV === 'production' ? (process.env.PORT || 80) : 8000;
 
   serverIntance.use(helmet());
   serverIntance.use(urlencoded({extended: false})); // support encoded bodies

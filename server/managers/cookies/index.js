@@ -3,8 +3,8 @@ import puppeteer from 'puppeteer';
 class CookiesManger {
   init () {
     return puppeteer.launch({
-      // executablePath: '/usr/bin/chromium-browser',
-      // args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
+      executablePath: '/usr/bin/chromium-browser',
+      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage']
     })
       .then(browser => {
         this.browser = browser;

@@ -6,6 +6,7 @@ class ProductResource extends BasicResource {
   }
 
   getDetailsByStore (id, {store, currency, keyStoreDataversion, countryCode}, cookie) {
+    console.log('cookie', cookie);
     return this.client.get('product/catalogue/v3/stockprice', {
       params: {
         productIds: id,

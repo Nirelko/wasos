@@ -8,6 +8,7 @@ class ProductResource extends BasicResource {
   getDetailsByStore (id, {store, currency, keyStoreDataversion, countryCode}, cookie) {
     console.log('cookie', cookie);
     console.log('before getDetailsByStore');
+    console.log(`http://asos.com/api/product/catalogue/v3/stockprice?productIds=${id}&store=${store}&currency=${currency}&countryCode=${countryCode}&keyStoreDataversion=${keyStoreDataversion}`);
     return this.client.get('product/catalogue/v3/stockprice', {
       params: {
         productIds: id,

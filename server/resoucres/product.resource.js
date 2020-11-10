@@ -14,10 +14,10 @@ class ProductResource extends BasicResource {
         currency,
         countryCode,
         keyStoreDataversion
-      },
-      headers: {
-        cookie
       }
+      // headers: {
+      //   cookie
+      // }
     })
       .then(({data}) => data);
   }

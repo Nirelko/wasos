@@ -69,8 +69,13 @@ class AsosManager {
   }
 
   loadStoresDetails (id, keyStoreDataversion, cookie) {
+    console.log('before loadStoresDetails');
     return this.getAllStores()
-      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion, cookie))));
+      .then(stores => Promise.all(stores.map(x => this.getDetailsByStore(id, x, keyStoreDataversion, cookie))))
+      .then(x => {
+        console.log('after loadStoresDetails');
+        return x;
+      });
   }
 
   calculateStoreDetails (stocskAndPrices) {
@@ -120,12 +125,14 @@ class AsosManager {
       };
     }
 
+    console.log('before loadAllSizeSchemes');
     return Promise.all(Object.keys(this.countryCodeToSizeScheme)
       .map(countryCode => (productSize.toLowerCase().includes(countryCode) ?
         Promise.resolve({[countryCode]: basicProductDetails.sizes}) :
         this.loadProductBasicDetails(this.generateUrlByCountryCode(this.countryCodeToSizeScheme[countryCode], url), cookie)
           .then(({sizes} = {}) => !sizes ? {} : ({[countryCode]: sizes})))))
       .then(sizeSchemesToSizesNames => {
+        console.log('after loadAllSizeSchemes');
         return ({
           ...basicProductDetails,
           sizeSchemeToSizesNames: Object.assign(...sizeSchemesToSizesNames)
@@ -153,13 +160,14 @@ class AsosManager {
   }
 
   loadProductBasicDetails (url, cookie) {
-    console.log('cookies', cookie);
+    console.log('before loadProductBasicDetails');
     return axios.get(url, {
       headers: {
         cookie
       }
     })
       .then(({data}) => {
+        console.log('after loadProductBasicDetails');
         if (!data) {
           return;
         }

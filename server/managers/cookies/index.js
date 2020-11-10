@@ -12,11 +12,13 @@ class CookiesManger {
   }
 
   getCookie (address) {
+    console.log('before cookie');
     return this.browser.createIncognitoBrowserContext()
       .then(context => context.newPage()
         .then(page => page.goto(address)
           .then(() => page.cookies()))
         .then(cookies => {
+          console.log('after cookie');
           return Promise.all([context.close(),
             Promise.resolve(this.calculateCookie(cookies))]);
         })

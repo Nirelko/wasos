@@ -88,7 +88,7 @@
   },
   "dependencies": {
     "@nirelko/wasos-common": "^1.0.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.18.3",
     "currency-code-map": "^1.0.2",
     "currency-symbol-map": "^4.0.4",

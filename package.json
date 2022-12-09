@@ -93,7 +93,7 @@
     "currency-code-map": "^1.0.2",
     "currency-symbol-map": "^4.0.4",
     "dotenv-extended": "^2.4.0",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-async-router": "^0.1.15",
     "express-jwt": "^5.3.1",
     "gmail-send": "^1.2.14",
